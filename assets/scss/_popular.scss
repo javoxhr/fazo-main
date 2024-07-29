@@ -1,0 +1,102 @@
+.popular {
+    margin-top: 60px;
+    &__title {
+        font-weight: 600;
+        font-size: 24px;
+        color: $sub-info-color;
+    }
+    &__cards-wrapper {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+        padding: 35px 0 50px;
+        &__card {
+            height: 115px;
+            border: 1px solid #F2F2F2;
+            padding: 20px 10px 20px 12px;
+            border-radius: 5px;
+            position: relative;
+            &__title {
+                font-weight: 600;
+                font-size: 18.5px;
+                padding-right: 100px;
+            }
+            img {
+                width: 136px;
+                height: 130px;
+                position: absolute;
+                top: -8px;
+                right: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1287px) {
+    .popular {
+        &__cards-wrapper {
+            &__card {
+                &__title {
+                    font-size: 16px;
+                }
+                img {
+                    width: 126px;
+                    height: 120px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1223px) {
+    .popular {
+        &__cards-wrapper {
+            &__card {
+                &__title {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1072px) {
+    .popular {
+        margin-top: 20px;
+        &__title {
+            font-size: 18px;
+        }
+        &__cards-wrapper {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media screen and (max-width: 546px) {
+    .popular {
+        &__title {
+            font-size: 14px;
+        }
+        &__cards-wrapper {
+            grid-template-columns: repeat(4, 1fr);
+            overflow-y: hidden;
+            overflow-x: auto;
+            gap: 10px;
+            margin-bottom: 20px;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            &__card {
+                width: 250px;
+                height: 90px;
+                &__title {
+                    font-weight: 500;
+                    font-size: 16px;
+                }
+                img {
+                    top: -12px;
+                }
+            }
+        }
+    }
+}

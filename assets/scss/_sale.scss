@@ -1,0 +1,193 @@
+.sale {
+    background: #F7F7F7;
+    margin-top: 66px;
+    padding: 80px 0 70px;
+    position: relative;
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 129px;
+        margin-left: -80px;
+        position: relative;
+    }
+    &__text-wrapper {
+        h1 {
+            font-weight: 500;
+            font-size: 35px;
+            color: #3E3E3E;
+        }
+        p {
+            width: 100%;
+            max-width: 450px;
+            font-weight: 400;
+            font-size: 16px;
+            color: $info-color;
+            line-height: 25px;
+            margin-top: 10px;
+        }
+    }
+    &__price {
+        .sal-after {
+            font-weight: 700;
+            font-size: 35px;
+            color: $pr-color;
+        }
+        .sal-before{
+            font-weight: 700;
+            font-size: 18px;
+            color: $info-color;
+            text-decoration: line-through;
+            display: block;
+            margin-top: 17px;
+        }
+        .sal-btn {
+            padding: 12px 51px;
+            border: 1px solid $pr-color;
+            background: transparent;
+            margin-top: 30px;
+            display: inline-block;
+            color: $pr-color;
+            border-radius: 5px;
+        }
+    }
+    &__swip {
+        position: relative;
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            position: absolute;
+            &:first-child{
+                left: -35px;
+                top: -140px;
+            }
+            &:last-child {
+                top: -140px;
+                right: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1290px) {
+    .sale {
+        &__swip {
+            button {
+                &:first-child {
+                    left: 0;
+                }
+            }
+        }
+        &__wrapper {
+            gap: 50px;
+            margin-left: 0;
+        }
+        &__text-wrapper {
+            h1 {
+                font-size: 30px;
+            }
+            p {
+                font-size: 15px;
+            }
+        }
+        &__price {
+            .sal-after {
+                font-size: 30px;
+            }
+            .sal-before {
+                font-size: 16px;
+                margin-top: 10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1097px) {
+    .sale {
+        &__swip {
+            button {
+                &:first-child {
+                    top: -300px;
+                }
+                &:last-child {
+                    top: -300px;
+                }
+            }
+        }
+        &__wrapper {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .sale {
+        &__text-wrapper {
+            h1 {
+                font-size: 25px;
+            }
+            p {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 595px) {
+    .sale {
+        padding: 50px 0;
+        &__wrapper {
+            gap: 20px;
+        }
+        &__img {
+            img {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+        &__text-wrapper {
+            h1 {
+                font-size: 18px;
+            }
+            p {
+                width: 100%;
+                max-width: 280px;
+                font-size: 12px;
+            }
+        }
+        &__price {
+            .sal-after {
+                font-size: 23px;
+            }
+            .sal-before {
+                font-size: 14px;
+            }
+            .sal-btn {
+                padding: 12px 51px;
+                font-size: 14px;
+                margin-top: 18px;
+            }
+        }
+        &__swip {
+            button {
+                &:first-child {
+                    left: 0;
+                    top: -230px;
+                }
+                &:last-child {
+                    right: 0;
+                    top: -230px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .sale {
+        margin-top: 0;
+        padding: 30px 0;
+    }
+}

@@ -1,0 +1,63 @@
+.werecommend {
+    &__text-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        h1 {
+            font-weight: 600;
+            font-size: 24px;
+            color: $sub-info-color;
+        }
+        a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 400;
+            font-size: 16px;
+            color: $info-color;
+        }
+    }
+    &__liquidation {
+        display: flex;
+        gap: 30px;
+        .liq {
+            margin-top: 40px;
+            a {
+                img {
+                    width: 400px;
+                    height: 817px;
+                }
+            }
+        }
+    }
+    &__cards-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: flex-start;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .werecommend {
+        &__cards-wrapper {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media screen and (max-width: 1111px) {
+    .werecommend {
+        &__liquidation {
+            flex-direction: column;
+            .liq {
+                display: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 618px) {
+    .werecommend {
+        display: none;
+    }
+}

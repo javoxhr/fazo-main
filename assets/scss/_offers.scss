@@ -1,0 +1,350 @@
+.offers {
+    &__text-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+        h1 {
+            font-weight: 600;
+            font-size: 24px;
+            color: #202020;
+        }
+        a {
+            font-weight: 400;
+            font-size: 16px;
+            color: #909090;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            img {
+                margin-top: 3px;
+            }
+        }
+    }
+    &__cards-wrapper {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        justify-content: center;
+        gap: 35px;
+        margin-top: 40px;
+        padding-bottom: 20px;
+        .sale-p {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: $pr-color;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 400;
+            font-size: 14px;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+        }
+        &__card {
+            width: 100%;
+            background: #fff;
+            border: 1px solid #F2F2F2;
+            padding: 20px 10px 15px;
+            border-radius: 7px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            transition: all .1s ease;
+            img {
+                transition: all .3s ease;
+            }
+            &:hover {
+                box-shadow: 1px 1px 30px #e9e8e8;
+                img {
+                    width: 150px;
+                }
+            }
+            &__price-wrap {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                .before-price {
+                    font-weight: 400;
+                    font-size: 12px;
+                    text-decoration: line-through;
+                    color: #9e9d9d;
+                }
+                .lin-price {
+                    width: 2px;
+                    height: 10px;
+                    background: #909090;
+                    display: block;
+                }
+                .sale-price {
+                    font-weight: 600;
+                    font-size: 16px;
+                    color: $pr-color;
+                }
+            }
+            @media screen and (max-width: 650px) {
+                &__price-wrap {
+                    flex-direction: column;
+                    .lin-price {
+                        display: none;
+                    }
+                }
+            }
+            &__title {
+                width: 100%;
+                max-width: 250px;
+                font-weight: 700;
+                font-size: 16px;
+                color: $title-color;
+                line-height: 24px;
+                text-align: center;
+                padding: 10px 0 20px;
+            }
+            &__info {
+                font-weight: 400;
+                font-size: 13px;
+                color: $info-color;
+            }
+            &__time {
+                display: flex;
+                align-items: center;
+                gap: 30px;
+                margin-top: 10px;
+                padding: 10px 0;
+                .tim {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 5px;
+                    position: relative;
+                    &:nth-child(1) {
+                        &::before {
+                            content: '';
+                            width: 1px;
+                            height: 24px;
+                            background: #E0E0E0;
+                            position: absolute;
+                            left: 45px;
+                            top: 3px;
+                        }
+                    }
+                    &:nth-child(2) {
+                        &::before {
+                            content: '';
+                            width: 2px;
+                            height: 24px;
+                            background: #E0E0E0;
+                            position: absolute;
+                            left: 53px;
+                            top: 3px;
+                        }
+                    }
+                    &:nth-child(3) {
+                        &::before {
+                            content: '';
+                            width: 2px;
+                            height: 24px;
+                            background: #E0E0E0;
+                            position: absolute;
+                            left: 53px;
+                            top: 3px;
+                        }
+                    }
+                    span {
+                        font-weight: 400;
+                        font-size: 10px;
+                        color: $info-color;
+                    }
+                    .num {
+                       font-weight: 400;
+                       font-size: 16px;
+                       color: $sub-info-color;
+                    }
+                }
+            }
+            &__btns {
+                display: flex;
+                align-items: center;
+                gap: 50px;
+                margin-top: 30px;
+                button {
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    svg {
+                        path {
+                            fill: #fff;
+                            stroke: #BDBDBD;
+                            transition: all .3s ease;
+                        }
+                        circle {
+                            fill: #fff;
+                            stroke: #BDBDBD;
+                            transition: all .1s ease;
+                        }
+                    }
+                    &:hover {
+                        svg {
+                            path {
+                                fill: $pr-color;
+                                stroke: $pr-color;
+                            }
+                            circle {
+                                stroke: $pr-color;
+                            }
+                        }
+                    }
+                    &:last-child {
+                        svg {
+                            path {
+                                fill: #fff;
+                                stroke: #BDBDBD;
+                                stroke-width: 6px;
+                                transition: all .3s ease;
+                            }
+                        }
+                        &:hover {
+                            svg {
+                                path {
+                                    fill: $pr-color;
+                                    stroke: $pr-color;
+                                }
+                            }
+                        }
+                    }
+                }
+                .card-btns-lin {
+                    width: 2px;
+                    height: 24px;
+                    background: #F2F2F2;
+                    display: block;
+                }
+            }
+            .btns-linia {
+                width: 100%;
+                height: 1px;
+                background: #F2F2F2;
+                display: block;
+                position: absolute;
+                bottom: 50px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1610px) {
+    .offers {
+        &__cards-wrapper {
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 1287px) {
+    .offers {
+        &__cards-wrapper {
+            grid-template-columns: repeat(4, 1fr);
+            &__card {
+                &__info {
+                    font-size: 14px;
+                }
+                &__price-wrap {
+                    .sale-price {
+                        font-size: 18px;
+                    }
+                    .sal-before {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1235px) {
+    .offers {
+        &__cards-wrapper {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
+@media screen and (max-width: 1001px) {
+    .offers {
+        &__cards-wrapper {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        &__text-wrapper {
+            h1 {
+                font-size: 17px;
+            }
+            a {
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 676px) {
+    .offers {
+        &__cards-wrapper {
+            &__card {
+                &__price-wrap {
+                    .before-price {
+                        font-size: 11px;
+                    }
+                    .sale-price {
+                        font-size: 16px;
+                    }
+                }
+                &__info {
+                    width: 100px;
+                    font-size: 13px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                &__title {
+                    width: 100%;
+                    max-width: 220px;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .offers {
+        &__cards-wrapper {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .offers {
+        &__text-wrapper {
+            h1 {
+                width: 160px;
+                font-size: 11px;
+            }
+            a {
+                width: 130px;
+                font-size: 11px;
+                color: $info-color;
+            }
+            margin-top: 25px;
+        }
+        &__cards-wrapper {
+            &__card {
+                padding: 0 0 8px;
+            }
+        }
+    }
+}

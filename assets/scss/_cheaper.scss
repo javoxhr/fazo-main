@@ -1,0 +1,40 @@
+.cheaper {
+    margin-top: 80px;
+    padding-bottom: 20px;
+    &__text-wrapper {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        h1 {
+            width: 204px;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 22px;
+        }
+        a {
+            font-weight: 400;
+            font-size: 16px;
+            color: $info-color;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .cheaper {
+        margin-top: 30px;
+        &__text-wrapper {
+            align-items: center;
+            h1 {
+                width: 100%;
+                font-size: 14px;
+            }
+            a {
+                width: 250px;
+                font-size: 12px;
+            }
+        }
+    }
+}
