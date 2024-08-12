@@ -9,7 +9,13 @@
     border-radius: 15px;
     .tel {
         font-weight: 400;
-        font-size: 12px;
+        font-size: 15px;
+        line-height: 22px;
+        padding-bottom: 5px;
+        span {
+            font-weight: 500;
+            font-size: 16px;
+        }
     }
    &__header {
     display: flex;
@@ -108,5 +114,15 @@
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.30);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .register {
+        width: 100%;
+        height: 100%;
+        &__header {
+            border-radius: 0;
+        }
     }
 }

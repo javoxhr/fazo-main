@@ -1,5 +1,7 @@
 <template>
   <div>
+    <UpdateInfo/>
+    <servic v-if="store.servic"/>
     <div class="cabinet">
       <div class="container">
         <div class="cabinet__header">
@@ -11,6 +13,7 @@
               </li>
               <li><a href="#">Личный кобинет</a></li>
             </ul>
+            <button class="manneger" @click="store.servic = true">Техподдержка</button>
           </nav>
           <div class="cabinet__header__grid-card">
             <button><img src="./images/grid.svg" alt="" /></button>
@@ -36,7 +39,7 @@
                   /></span>
                   <span>Личные данные</span>
                 </div>
-                <button>Изменит</button>
+                <button @click="store.update = !store.update">Изменит</button>
               </div>
               <span class="cabinet-right-linia"></span>
               <div class="user-info">

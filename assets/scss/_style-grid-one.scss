@@ -1,0 +1,20 @@
+.p-slider {
+    margin-top: 20px;
+    .p-slider-range {
+        background: $pr-color;
+    }
+}
+
+.p-slider.p-slider-horizontal {
+    height: 4px;
+}
+
+.p-slider-handle {
+    top: -7px;
+    background: $pr-color;
+}
+
+.p-slider .p-slider-handle::before {
+    content: '';
+    background: $pr-color;
+}

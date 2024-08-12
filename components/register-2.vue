@@ -4,7 +4,7 @@
     <div class="register">
       <div class="register__header">
         <h2>Регистрация</h2>
-        <button>Назать</button>
+        <button @click="store.signUp = false, store.verifiyCode = true">Назать</button>
       </div>
       <form @submit.prevent="signUp()">
         <span class="tel">Имя</span>
@@ -26,9 +26,11 @@
 </template>
 
 <script setup>
+import { useToast } from "vue-toastification";
 import services from "~/services/services";
 import { useStore } from "~/store/store";
 const store = useStore();
+const toast = useToast()
 
 const firstName = ref("");
 const lastName = ref("");
@@ -37,6 +39,14 @@ const passwordRepeat = ref("");
 
 function reloadFunc() {
   window.location.reload(true)
+}
+
+const successNotify = function() {
+  toast.success('Добро пожаловать')
+}
+
+const errorNotify = function() {
+  toast.error('Заполните анкету')
 }
 
 async function signUp() {
@@ -51,7 +61,12 @@ async function signUp() {
   if(res.status == 200) {
     localStorage.setItem("authKey", res.data.auth_key)
     store.signUp = false
-    reloadFunc()
+    setTimeout(()=> {
+      reloadFunc()
+    }, 1000)
+    successNotify()
+  } else {
+    errorNotify()
   }
 }
 </script>

@@ -1,0 +1,20 @@
+{
+    "name": "Hello",
+    "chatName": "Technical support",
+    "chatTitle": "Bot sender",
+    "botMessage": "Hello! Your message has been sent successfully. Our staff will contact you soon, leave your number if you haven’t already",
+    "backButton": "Back",
+    "chatInput": "Write a message",
+    "flashOffers": "Flash offers",
+    "PopularCategories": "Popular Categories",
+    "CheapProducts": "Cheap products",
+    "Login": "Login",
+    "Saved": "Saved",
+    "Cart": "Cart",
+    "Brands": "Brands",
+    "mainInputPlaceHolder": "Telephones and household",
+    "cartText": "Your Cart is Empty!",
+    "buttonHeader": "Search",
+    "buttonCategory": "Categories",
+    "moreDetailes": "more details"
+}

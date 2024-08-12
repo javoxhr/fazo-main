@@ -81,6 +81,8 @@
                 margin-top: 13px;
                 input {
                     accent-color: $pr-color;
+                    width: 20px;
+                    height: 20px;
                 }
                 h2 {
                     font-weight: 400;
@@ -106,11 +108,20 @@
     }
     &__list {
         margin-top: 10px;
+        padding-bottom: 20px;
         ul {
             display: flex;
             flex-direction: column;
             gap: 10px;
             li {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                input {
+                    width: 20px;
+                    height: 20px;
+                    accent-color: $pr-color;
+                }
                 a {
                     font-weight: 400;
                     font-size: 14px;
@@ -145,6 +156,8 @@
                 gap: 8px;
                 input {
                     accent-color: $pr-color;
+                    width: 20px;
+                    height: 20px;
                 }
                 h2 {
                     font-weight: 400;
@@ -155,11 +168,33 @@
     }
     &__cards-wrapper {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         justify-content: center;
         align-items: center;
-        gap: 20px;
+        gap: 30px;
         padding-bottom: 30px;
+        @media screen and (max-width: 1287px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
+.check-btn {
+    padding: 10px 20px;
+    font-weight: 400;
+    font-size: 18px;
+    color: #fff;
+    background: $pr-color;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all .1s ease;
+    margin-top: 20px;
+    &:hover {
+        opacity: 0.9;
+    }
+    &:active {
+        opacity: 0.8;
     }
 }
 

@@ -1,16 +1,38 @@
 <template>
   <div>
-    <loader v-if="store.loader"/>
+    <loader v-if="store.loader" />
     <div class="detail">
       <div class="container">
         <div class="detail__images-wrap">
-          <div class="detail__imgaes-wrap__big-img big-img">
-            <img :src="detail?.product?.imageUrl" alt="" />
-          </div>
+          <Swiper :slides-per-view="1" class="big-swiper">
+            <SwiperSlide
+              class="big-swiper-slide"
+              v-for="item in detail?.product?.images"
+              :key="item"
+            >
+              <div class="detail__imgaes-wrap__big-img big-img">
+                <img :src="detail?.product?.images[index]" alt="" />
+              </div>
+            </SwiperSlide>
+          </Swiper>
           <div class="detail__images-wrap__mini-images">
-            <li v-for="item in detail?.product?.images" :key="item">
-                <img class="mini-images-product" :src="item" alt="" />
-            </li>
+            <Swiper
+              slides-per-view="4"
+              class="swiper-main-mini-images"
+              :modules="[SwiperNavigation]"
+              :navigation="true"
+              :loop="true"
+            >
+              <SwiperSlide
+                class="mini-images"
+                v-for="(item, i) in detail?.product?.images"
+                :key="item"
+              >
+                <li @click="index = i">
+                  <img class="mini-images-product" :src="item" alt="" />
+                </li>
+              </SwiperSlide>
+            </Swiper>
           </div>
         </div>
 
@@ -19,9 +41,9 @@
             {{ detail?.product?.name }}
           </h1>
           <div class="detail__text-wrapper__price">
-            <span>{{detail?.product?.price}} cум</span>
+            <span>{{ detail?.product?.price }} cум</span>
             <div class="offers__cards-wrapper__card__btns detail__cart-btns">
-              <button>
+              <button @click="addToCart(item)">
                 <svg
                   class="feather feather-shopping-cart"
                   fill="none"
@@ -56,7 +78,7 @@
                 </svg>
               </button>
               <span class="card-btns-lin"></span>
-              <button>
+              <button @click="createSaved()">
                 <svg
                   enable-background="new 0 0 128 128"
                   height="25px"
@@ -76,18 +98,34 @@
               </button>
             </div>
           </div>
+          <span class="product-quantitiy"
+            >В наличии: <span>{{ detail?.product?.residue_store }}</span
+            ><span>шт</span></span
+          >
           <div class="detail__text-wrapper__buy-btn">
             <button>Купить сейчас</button>
           </div>
           <div class="detail__text-wrapper__info">
             <span>Общая Информация</span>
             <p>
-                {{ detail?.product?.description }}
+              {{ detail?.product?.description }}
             </p>
           </div>
-          <div class="product-info" v-for="item in detail?.characterInfo" :key="item">
-            <h1>{{ item?.groupName == 'Asosiy xarakteristikalar' ? item?.groupName : ''}}</h1>
-          </div>
+          <ul
+            class="product-info"
+            v-for="item in detail?.characterInfo"
+            :key="item"
+          >
+            <h2 class="product-info-name">{{ item?.groupName }}</h2>
+            <li
+              class="list-character"
+              v-for="character in item.characters"
+              :key="character"
+            >
+              <h4>{{ character.name }}</h4>
+              <h5>{{ character.value }}</h5>
+            </li>
+          </ul>
         </div>
 
         <div class="detail__info-cards">
@@ -136,27 +174,80 @@
 </template>
 
 <script setup>
+import { addToCart } from "~/composables/addToCart";
 import { useStore } from "~/store/store";
- import services from "~/services/services";
- const store = useStore()
- const route = useRoute()
+import services from "~/services/services";
+const store = useStore();
+const route = useRoute();
+const { locale, locales, t } = useI18n();
 
- const detail = ref([])
+const index = ref(0);
 
- async function getDetail() {
-    store.loader = true
-    const res = await services.getDetail(route.params.slug)
-    detail.value = res.data
-    console.log(res)
-    store.loader = false
- }
- getDetail()
+const detail = ref({});
+
+const item = ref();
+
+async function getDetail() {
+  store.loader = true;
+  const res = await services.getDetail(route.params.slug, locale.value);
+  detail.value = res.data;
+  console.log(res);
+  item.value = {
+    title: res?.data?.product?.name,
+    price: res?.data?.product?.price,
+    quantity: 1,
+    image: res?.data?.product?.imageUrl,
+    id: res?.data?.product?.id,
+  };
+  store.loader = false;
+}
+
+getDetail();
+
+async function getSavedProduct() {
+  const res = await services.getSavedProduct(store?.token);
+  store.savedProducts = res?.data;
+}
+
+const createSaved = async () => {
+  const res = await services.createSaved(store?.token, detail?.product?.slug, locale.value);
+  getSavedProduct()
+};
+
+const checkSaved = computed(() => {
+    const item = store.cart?.find((el) => el?.id == detail?.product?.id);
+    if (item) {
+      return true;
+    } else {
+      return false;
+    }
+});
 </script>
 
 <style lang="scss" scoped>
 .mini-images-product {
-    width: 80px;
+  width: 80px;
 }
+
+.mini-images {
+  width: 100px !important;
+}
+
+.swiper-main-mini-images {
+  width: 400px;
+  box-sizing: border-box;
+  height: 20%;
+  padding: 10px 0;
+}
+
+.big-swiper-slide {
+  width: 300px !important;
+}
+
+.big-swiper {
+  width: 300px;
+}
+
 .big-img {
   img {
     width: 250px;
@@ -164,6 +255,9 @@ import { useStore } from "~/store/store";
   }
 }
 .product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   h1 {
     font-weight: 500;
     font-size: 25px;

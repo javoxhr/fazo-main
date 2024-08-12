@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const useStore = defineStore("store", ()=> {
+export const useStore = defineStore("store", () => {
     const registerOpen = ref(false)
     const registerCode = ref(false)
     const phone = ref("")
@@ -12,15 +12,22 @@ export const useStore = defineStore("store", ()=> {
     const noti = ref(-100 + '%')
     const resetPasswordPhone = ref(false)
     const resetCode = ref(false)
-    const token = computed(()=> {
-        if(process.client) {
+    const token = computed(() => {
+        if (process.client) {
             const token = localStorage.getItem("authKey") ? localStorage.getItem("authKey") : null
             return token
         }
     })
     const userInfo = ref({})
     const loader = ref(true)
+    const cart = ref([])
+    const showCart = ref(false)
+    const savedProducts = ref({})
+    const update = ref(false)
+    const servic = ref(false)
+    const clearStorage = ref(false)
     return {
+        savedProducts,
         registerCode,
         phone,
         enterPhone,
@@ -34,6 +41,11 @@ export const useStore = defineStore("store", ()=> {
         userInfo,
         resetPasswordPhone,
         resetCode,
-        loader
+        loader,
+        cart,
+        showCart,
+        update,
+        servic,
+        clearStorage,
     }
 })

@@ -1,5 +1,5 @@
 const baseUrl = ref("")
-if(process.client) {
+if (process.client) {
     baseUrl.value = useRuntimeConfig().public.apiBase
 }
 
@@ -28,7 +28,7 @@ export default {
         })
     },
     code(code, phone) {
-        return $fetch(`${baseUrl.value}auth/register/verify`,{
+        return $fetch(`${baseUrl.value}auth/register/verify`, {
             method: "POST",
             body: {
                 phone: phone,
@@ -79,10 +79,111 @@ export default {
     getHeaderCategorys() {
         return $fetch(`${baseUrl.value}category-manager/category/header-categories`)
     },
-    getProductCategory() {
-        return $fetch("https://api.mtdmarket.uz/api/product-manager/our-offers/index")
+    getProductCategory(lang) {
+        return $fetch(`${baseUrl.value}product-manager/our-offers/index?parentCategoryKey=smartfon-va-gadjetlar`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
     },
-    getDetail(slug) {
-        return $fetch(`https://api.mtdmarket.uz/api/product-manager/product/detail?productKey=${slug}`)
+    getDetail(slug, lang) {
+        return $fetch(`https://api.mtdmarket.uz/api/product-manager/product/detail?productKey=${slug}`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
+    },
+    getSavedProduct(token) {
+        return $fetch(`${baseUrl.value}product-manager/product-save/index`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    },
+    createSaved(token, slug, lang) {
+        $fetch(`${baseUrl.value}product-manager/product-save/create`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Accept-Language": lang
+            },
+            params: {
+                productKey: slug,
+            },
+            body: {
+                
+            }
+        })
+    },
+    update(token, firstName, lastName) {
+        return $fetch(`${baseUrl.value}profile-manager/profile/update-name`, {
+            method: "POST",
+            body: {
+                firstname: firstName,
+                lastname: lastName,
+            },
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    },
+    popularCategory(lang) {
+        return $fetch(`${baseUrl.value}category-manager/category/popular-categories`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
+    },
+    searchProduct(el, lang) {
+        return $fetch(`${baseUrl.value}product-manager/product/search?searchKey=${el}`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
+    },
+    cheapProduct(lang) {
+        return $fetch(`${baseUrl.value}product-manager/cheap-product/index`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
+    },
+    bodyBanners(lang) {
+        return $fetch(`${baseUrl.value}banner/body-banners`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
+    },
+    getBrands() {
+        return $fetch(`${baseUrl.value}brand/index`)
+    },
+    categorys(s, l) {
+        return $fetch(`${baseUrl.value}category-manager/category/index?searchKey=${s}`, {
+            headers: {
+                "Accept-Language": l
+            }
+        })
+    },
+    getCategorysProducts(slug, lang) {
+        return $fetch(`https://api.mtdmarket.uz/api/product-manager/category-product/category?&&page=1&slugKey=${slug}&searchKey=&maxPrice=&minPrice=&priceSort=&nameSort=`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
+    },
+    deliveryInfo(lang) {
+        return $fetch("https://api.mtdmarket.uz/api/page-info/category", {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
+    },
+    callCenter(lang) {
+        return $fetch(`${baseUrl.value}contact-us/about`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
     }
 }

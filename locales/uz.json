@@ -1,0 +1,20 @@
+{
+    "name": "Salom",
+    "chatName": "Qo'lab quvatlash",
+    "chatTitle": "Bot jo'natuvchi",
+    "botMessage": "Salom! Xabaringiz muvaffaqiyatli yuborildi. Xodimlarimiz tez orada siz bilan bog'lanadi, agar raqamingizni qoldirmagan bo'lsangiz raqamingizni qoldiring.",
+    "backButton": "Ortga",
+    "chatInput": "Xabar yozing",
+    "flashOffers": "Qaynoq takliflar",
+    "PopularCategories": "Ommabop toifalar",
+    "CheapProducts": "Arzon mahsulotlar",
+    "Login": "Kirish",
+    "Saved": "Istaglar",
+    "Cart": "Savat",
+    "Brands": "Brendlar",
+    "mainInputPlaceHolder": "Telefonlar va uy xo'jaligi",
+    "cartText": "Savatingiz boʻsh!",
+    "buttonHeader": "Qidiruv",
+    "buttonCategory": "Kategoriyalar",
+    "moreDetailes": "Batafsil"
+}

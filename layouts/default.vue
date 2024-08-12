@@ -1,24 +1,20 @@
 <template>
-  <div>
+  <div class="default">
+    <loader v-if="store.loader"/>
+    <servic v-if="store.servic" />
+    <button class="mesage-btn">
+      <img
+        src="~/assets/images/png/mesage-icon.png"
+        alt=""
+        @click="store.servic = !store.servic"
+      /><span>0</span>
+    </button>
     <header>
-      <div class="Notification" :style="{ right: store.noti }">
-        <img src="~/assets/images/svg/success.svg" alt="" />
-        <h1>success</h1>
-      </div>
       <div class="header-top">
         <div class="container">
-          <div class="header-top__map">
-            <img src="@/assets/images/svg/map.svg" alt="" />
-            <span>Ташкент</span>
-          </div>
-
           <nav class="header-top__list">
-            <ul>
-              <li><a href="#">Наши магазины</a></li>
-              <li><a target="_blank" href="./buy.html">B2B продажи</a></li>
-              <li><a href="./cabinet.html">Покупка в рассрочку</a></li>
-              <li><a href="#">Способы оплаты</a></li>
-              <li><a href="#">Гарантия на товары</a></li>
+            <ul class="header-top-list">
+              <li v-for="item in deliveryInfo" :key="item"><NuxtLink to="/">{{ item?.name }}</NuxtLink></li>
             </ul>
           </nav>
 
@@ -29,8 +25,19 @@
             </div>
 
             <div class="header-top__lang">
-              <span>Рус</span>
-              <img src="@/assets/images/svg/Arrow-header (2).svg" alt="" />
+              <div class="lang-open-wrapper" @click="langShow = !langShow">
+                <button>{{ locale }}</button>
+                <img class="lang-strel" :class="{'lang-strel-active': langShow == true}" src="@/assets/images/svg/Arrow-header (2).svg" alt="" />
+              </div>
+              <div class="list-lang" v-if="langShow">
+                <NuxtLink @click="langShow = false"
+                  class="list-lang-btn"
+                  v-for="{ code, name } in locales"
+                  :to="swithcLocalePath(code)"
+                  :key="code"
+                  >{{ name }}
+                </NuxtLink>
+              </div>
             </div>
           </div>
         </div>
@@ -39,7 +46,7 @@
       <div class="menu-header">
         <div class="container">
           <NuxtLink to="/" class="menu-header__logo"
-            ><img src="@/assets/images/svg/loco.svg" alt=""/>
+            ><img src="@/assets/images/svg/loco.svg" alt="" />
           </NuxtLink>
           <div class="menu-header__contact">
             <button>
@@ -53,9 +60,25 @@
       </div>
 
       <div class="header-bottom">
+        <div class="search-list" v-if="searchVal?.length && searchList?.items?.length > 1 ? true : false">
+          <div class="container">
+            <div class="search-list__wrapper">
+              <div
+                class="search-list-item"
+                v-for="item in searchList?.items"
+                :key="item"
+              >
+                <img :src="item?.imageUrl" alt="" />
+                <NuxtLink @click="searchVal = ''" :to="`/product/${item?.slug}`">
+                  <h2>{{ item?.name }}</h2>
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="container">
           <div class="logo">
-            <NuxtLink to="/"
+            <NuxtLink :to="localePath('/')"
               ><img src="@/assets/images/svg/loco.svg" alt=""
             /></NuxtLink>
           </div>
@@ -76,7 +99,12 @@
 
               <div class="header-bottom__search__input">
                 <form>
-                  <input type="text" placeholder="Телефоны и бытовая" />
+                  <input
+                    type="text"
+                    @input="searchProduct()"
+                    v-model="searchVal"
+                    :placeholder="t('mainInputPlaceHolder')"
+                  />
                   <button type="submit">
                     <img src="./images/mic.svg" alt="" />
                   </button>
@@ -87,7 +115,7 @@
             <div class="header-bottom__search__btn">
               <button>
                 <img src="@/assets/images/svg/search.svg" alt="" />
-                <h4 class="search-btn-text">Поиск</h4>
+                <h4 class="search-btn-text">{{ t("buttonHeader") }}</h4>
               </button>
             </div>
           </div>
@@ -107,22 +135,51 @@
                 >{{
                   store?.userInfo?.firstname
                     ? store?.userInfo?.firstname
-                    : "Войти"
+                    : `${t("Login")}`
                 }}
                 {{
                   store?.userInfo?.lastname ? store?.userInfo?.lastname : ""
                 }}</span
               >
             </NuxtLink>
-
-            <div class="header-bottom__items__item">
+            <NuxtLink
+              to="/saved"
+              v-if="store.token"
+              class="header-bottom__items__item"
+            >
+              <span
+                class="saved-count"
+                v-if="store.savedProducts?.items?.length"
+                >{{ store.savedProducts?.items?.length }}</span
+              >
               <img src="@/assets/images/svg/like.svg" alt="" />
-              <span>Избранное</span>
-            </div>
+              <span>{{ t("Saved") }}</span>
+            </NuxtLink>
 
-            <div class="header-bottom__items__item">
+            <button
+              v-if="!store.token"
+              @click="store.registerOpen = !store.registerOpen"
+              style="border: none; background: none"
+              class="header-bottom__items__item"
+            >
+              <span
+                class="saved-count"
+                v-if="store.savedProducts?.items?.length"
+                >{{ store.savedProducts?.items?.length }}</span
+              >
+              <img src="@/assets/images/svg/like.svg" alt="" />
+              <span>{{ t("Saved") }}</span>
+            </button>
+
+            <div
+              class="header-bottom__items__item"
+              @click="store.showCart = !store.showCart"
+            >
               <img src="@/assets/images/svg/shopping-cart.svg" alt="" />
-              <span>Корзина</span>
+              <span class="product-count" v-if="store.cart.length">{{
+                productQuantity
+              }}</span>
+              <span>{{ t("Cart") }}</span>
             </div>
           </div>
         </div>
@@ -132,14 +189,16 @@
         <div class="container">
           <div class="header-category__main-btn">
             <button @click="categoryOpen = !categoryOpen">
-              <img src="@/assets/images/svg/category-btn.svg" alt="" />Категории
+              <img src="@/assets/images/svg/category-btn.svg" alt="" />{{t("buttonCategory")}}
             </button>
           </div>
 
           <nav class="header-category__list">
             <ul>
               <li v-for="list in headerCategorys" :key="list">
-                <NuxtLink to="/">{{ list?.name }}</NuxtLink>
+                <NuxtLink :to="localePath(`/categorys/${list.slug}`)">{{
+                  list?.name
+                }}</NuxtLink>
               </li>
             </ul>
           </nav>
@@ -283,12 +342,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="open-category__banner">
-              <a href="#">
-                <img src="@/assets/images/jpg/category-banner.jpg" alt="" />
-              </a>
-            </div>
           </div>
         </div>
       </div>
@@ -343,7 +396,7 @@
             <img src="@/assets/images/svg/bottom-menu-home.svg" alt="" />
           </button>
           <button>
-            <img src="@/assets/images/svg/menu-bottom-exit.svg" alt="" />
+            <img src="@/assets/images/svg/user.svg" alt="" />
           </button>
           <button>
             <img
@@ -361,6 +414,7 @@
     <CodeRegister :length="4" />
     <resetVerifyCode :lengthRes="4" />
     <NuxtPage />
+    <cart />
     <div class="footer">
       <div class="container">
         <div class="footer__left">
@@ -661,26 +715,86 @@ import { useStore } from "~/store/store";
 
 const store = useStore();
 
+const langShow = ref(false);
+const localePath = useLocalePath();
+const swithcLocalePath = useSwitchLocalePath();
+const { locale, locales, t } = useI18n();
+
+const currentLang = computed(() => locale.value);
+
+const productQuantity = computed(() => {
+  let quantity = 0;
+  store.cart.forEach((el) => {
+    quantity += el.quantity;
+  });
+  return quantity;
+});
+
 const categoryOpen = ref(false);
 const openMenu = ref(-100 + "%");
-
+async function getSavedProduct() {
+  const res = await services.getSavedProduct(store.token);
+  store.savedProducts = res?.data;
+}
 async function getUserInfo() {
+  store.loader = true
   const res = await services.getUserInfo(store.token);
   console.log(res.data);
-  store.userInfo = res.data;
+store.userInfo = res.data;  
   store.openMenu = false;
+  store.loader = false
 }
 
 const headerCategorys = ref({});
 
 async function getHeaderCategorys() {
-  const res = await services.getHeaderCategorys();
+  store.loader = true
+  const res = await services.getHeaderCategorys(searchVal.value, locale.value);
   headerCategorys.value = res.data;
   console.log(res);
+  store.loader = false
 }
 
+const searchVal = ref("");
+const searchList = ref({});
+
+async function searchProduct() {
+  const res = await services.searchProduct(searchVal.value, locale.value);
+  searchList.value = res.data;
+}
+
+const categorysProducts = ref({});
+
+async function categorys() {
+  store.loader = true
+  const res = await services.categorys(searchVal.value, locale.value);
+  categorysProducts.value = res.data;
+  console.log(res)
+  store.loader = false
+}
+
+const deliveryInfo = ref({})
+
+ async function infoDelivery() {
+  const res = await services.deliveryInfo(locale.value)
+  deliveryInfo.value = res?.data
+  console.log(res)
+}
+
+
+infoDelivery()
+
+watch(()=> locale.value, ()=> {
+  infoDelivery()
+  categorys();
+})
+
+onMounted(()=> {
+  categorys();
+})
 getHeaderCategorys();
 getUserInfo();
+getSavedProduct();
 </script>
 
 <style lang="scss" scoped>
@@ -703,6 +817,77 @@ getUserInfo();
   }
   img {
     width: 25px;
+  }
+}
+.header-top-list {
+  display: flex;
+  align-items: center;
+}
+.product-count {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgb(0, 123, 255);
+  color: #fff;
+  font-weight: 400;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -11px;
+  right: 11px;
+}
+.list-lang {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  top: 53px;
+  right: 62px;
+  z-index: 1;
+  width: 40px;
+  background: rgb(0, 123, 255);
+  padding: 5px 10px 10px;
+  border-radius: 0 0 10px 10px;
+  animation: langAnim 0.3s forwards;
+}
+
+@keyframes langAnim {
+  from {
+    top: 40px;
+    opacity: 0;
+  }
+  to {
+    top: 53px;
+    opacity: 1;
+  }
+}
+
+.lang-open-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  button {
+    border: none;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 19px;
+  }
+}
+.list-lang-btn {
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  img {
+    width: 30px;
   }
 }
 </style>

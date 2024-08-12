@@ -5,6 +5,10 @@
         justify-content: space-between;
         margin-top: 30px;
         nav {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             ul {
                 display: flex;
                 align-items: center;
@@ -245,5 +249,222 @@
                 }
             }
         }
+    }
+}
+
+.manneger {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background: $pr-color;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    &:hover {
+        opacity: 0.9;
+    } 
+    &:active {
+        opacity: 0.8;
+    }
+}
+
+.chat {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    width: 300px;
+    height: 400px;
+    animation: chat-anim .3s forwards;
+}
+
+@keyframes chat-anim {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $pr-color;
+    padding: 10px 13px;
+    &__text-wrapper {
+        span {
+            font-size: 12px;
+        }
+    }
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+    * {
+        color: #fff;
+        font-size: 16px;
+    }
+}
+
+.chat-footer {
+    width: 100%;
+    height: 82.4%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    form {
+        width: 100%;
+        position: relative;
+        .settings-chat {
+            width: 30px;
+            border: none;
+            background: none;
+            position: absolute;
+            left: 10px;
+            top: 6px;
+            img {
+                width: 30px;
+            }
+            &:hover {
+                opacity: 0.9;
+            }
+            &:active {
+                opacity: 0.8;
+            }
+        }
+        input {
+            width: 100%;
+            padding: 13px 20px 13px 50px;
+            border: 1px solid #d7d5d5;
+            outline: none;
+        }
+        button {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.20);
+    z-index: 9;
+}
+
+.messages-wrapper {
+    width: 100%;
+    height: 71.5%;
+    position: absolute;
+    background: #fff;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.messages {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px 10px 20px;
+    gap: 15px;
+}
+
+.message {
+    max-width: 230px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 7px;
+    border-radius: 10px;
+    margin: 5px 0;
+    display: inline-block;
+}
+
+.user-message {
+    background: $pr-color;
+    color: #fff;
+    border-radius: 10px 10px 0 10px;
+    align-self: flex-end;
+}
+
+.bot-message {
+    background: #e4e2e2;
+    color: #000;
+    border-radius: 10px 10px 10px 0;
+    align-self: flex-start;
+}
+
+@media screen and (max-width: 600px) {
+    .chat {
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+    }
+    .chat-footer {
+        height: 90%;
+    }
+    .chat-header {
+        justify-content: space-between;
+        gap: 10px;
+    }
+}
+
+.insaydes-settings {
+    width: 300px;
+    height: 285px;
+    background: #fff;
+    position: absolute;
+    top: 70px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: settings-anim .3s forwards;
+    img {
+        width: 70px;
+    }
+    button {
+        padding: 6px 10px;
+        border: none;
+        background: $pr-color;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all .1s ease;
+        &:hover {
+            opacity: 0.9;
+        }
+        &:active {
+            opacity: 0.8;
+        }
+    }
+}
+
+@keyframes settings-anim {
+    from {
+        opacity: 0;
+        top: 80px;
+    }
+    to {
+        opacity: 1;
+        top: 70px;
     }
 }
