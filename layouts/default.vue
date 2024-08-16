@@ -1,6 +1,6 @@
 <template>
   <div class="default">
-    <loader v-if="store.loader"/>
+    <loader v-if="store.loader" />
     <servic v-if="store.servic" />
     <button class="mesage-btn">
       <img
@@ -14,7 +14,9 @@
         <div class="container">
           <nav class="header-top__list">
             <ul class="header-top-list">
-              <li v-for="item in deliveryInfo" :key="item"><NuxtLink to="/">{{ item?.name }}</NuxtLink></li>
+              <li v-for="item in deliveryInfo" :key="item">
+                <NuxtLink to="/">{{ item?.name }}</NuxtLink>
+              </li>
             </ul>
           </nav>
 
@@ -27,10 +29,16 @@
             <div class="header-top__lang">
               <div class="lang-open-wrapper" @click="langShow = !langShow">
                 <button>{{ locale }}</button>
-                <img class="lang-strel" :class="{'lang-strel-active': langShow == true}" src="@/assets/images/svg/Arrow-header (2).svg" alt="" />
+                <img
+                  class="lang-strel"
+                  :class="{ 'lang-strel-active': langShow == true }"
+                  src="@/assets/images/svg/Arrow-header (2).svg"
+                  alt=""
+                />
               </div>
               <div class="list-lang" v-if="langShow">
-                <NuxtLink @click="langShow = false"
+                <NuxtLink
+                  @click="langShow = false"
                   class="list-lang-btn"
                   v-for="{ code, name } in locales"
                   :to="swithcLocalePath(code)"
@@ -60,7 +68,12 @@
       </div>
 
       <div class="header-bottom">
-        <div class="search-list" v-if="searchVal?.length && searchList?.items?.length > 1 ? true : false">
+        <div
+          class="search-list"
+          v-if="
+            searchVal?.length && searchList?.items?.length > 1 ? true : false
+          "
+        >
           <div class="container">
             <div class="search-list__wrapper">
               <div
@@ -69,7 +82,10 @@
                 :key="item"
               >
                 <img :src="item?.imageUrl" alt="" />
-                <NuxtLink @click="searchVal = ''" :to="`/product/${item?.slug}`">
+                <NuxtLink
+                  @click="searchVal = ''"
+                  :to="`/product/${item?.slug}`"
+                >
                   <h2>{{ item?.name }}</h2>
                 </NuxtLink>
               </div>
@@ -189,7 +205,9 @@
         <div class="container">
           <div class="header-category__main-btn">
             <button @click="categoryOpen = !categoryOpen">
-              <img src="@/assets/images/svg/category-btn.svg" alt="" />{{t("buttonCategory")}}
+              <img src="@/assets/images/svg/category-btn.svg" alt="" />{{
+                t("buttonCategory")
+              }}
             </button>
           </div>
 
@@ -210,135 +228,23 @@
           <div class="container">
             <div class="open-category__wrapper">
               <div class="open-category__left">
-                <div class="open-category__left__item">
-                  <a href="#">
+                <div class="open-category__left__item" v-for="item in headerCategorys" :key="item">
+                  <button href="#">
                     <img
-                      src="@/assets/images/svg/category-phone-icon.svg"
+                      :src="item?.iconUrl"
                       alt=""
                     />
-                    Телефоны, планшеты
+                    {{ item?.name }}
                     <img src="@/assets/images/png/category-arrow.png" alt="" />
-                  </a>
-                </div>
-
-                <div class="open-category__left__item">
-                  <a href="#">
-                    <img
-                      src="@/assets/images/svg/notebook-category.svg"
-                      alt=""
-                    />
-                    Ноутбуки
-                    <img src="@/assets/images/png/category-arrow.png" alt="" />
-                  </a>
-                </div>
-
-                <div class="open-category__left__item">
-                  <a href="#">
-                    <img src="@/assets/images/svg/router-category.svg" alt="" />
-                    Сетевое оборудование
-                    <img src="@/assets/images/png/category-arrow.png" alt="" />
-                  </a>
-                </div>
-
-                <div class="open-category__left__item">
-                  <a href="#">
-                    <img src="@/assets/images/svg/camera-category.svg" alt="" />
-                    Видеонаблюдение
-                    <img src="@/assets/images/png/category-arrow.png" alt="" />
-                  </a>
-                </div>
-
-                <div class="open-category__left__item">
-                  <a href="#">
-                    <img src="@/assets/images/svg/comp-category.svg" alt="" />
-                    Компьютеры
-                    <img src="@/assets/images/png/category-arrow.png" alt="" />
-                  </a>
-                </div>
-
-                <div class="open-category__left__item">
-                  <a href="#">
-                    <img src="@/assets/images/svg/ofis-category.svg" alt="" />
-                    Техника для офиса
-                    <img src="@/assets/images/png/category-arrow.png" alt="" />
-                  </a>
-                </div>
-
-                <div class="open-category__left__item">
-                  <a href="#">
-                    <img src="@/assets/images/svg/acses-category.svg" alt="" />
-                    Аксессуары
-                    <img src="@/assets/images/png/category-arrow.png" alt="" />
-                  </a>
-                </div>
-
-                <div class="open-category__left__item">
-                  <a href="#">
-                    <img src="@/assets/images/svg/home-category.svg" alt="" />
-                    Товары для дома
-                    <img src="@/assets/images/png/category-arrow.png" alt="" />
-                  </a>
-                </div>
-
-                <div class="open-category__left__item">
-                  <a href="#">
-                    <img src="@/assets/images/svg/mouse-category.svg" alt="" />
-                    Периферийные устройства
-                    <img src="@/assets/images/png/category-arrow.png" alt="" />
-                  </a>
-                </div>
-
-                <div class="open-category__left__item">
-                  <a href="#">
-                    <img src="@/assets/images/svg/ip-category.svg" alt="" />
-                    IP Телефония
-                    <img src="@/assets/images/png/category-arrow.png" alt="" />
-                  </a>
+                  </button>
                 </div>
               </div>
 
               <div class="open-category-cet">
-                <h1>Сетевое оборудование</h1>
-                <div class="cet-items-wrapper">
-                  <div class="open-category__left__item">
-                    <a href="#"> Коммутаторы </a>
-                  </div>
-
-                  <div class="open-category__left__item">
-                    <a href="#"> Точки доступа Wi-Fi </a>
-                  </div>
-
-                  <div class="open-category__left__item">
-                    <a href="#"> Медиаконверторы </a>
-                  </div>
-
-                  <div class="open-category__left__item">
-                    <a href="#"> ADSL роутеры </a>
-                  </div>
-
-                  <div class="open-category__left__item">
-                    <a href="#"> Сетевые адаптеры </a>
-                  </div>
-
-                  <div class="open-category__left__item">
-                    <a href="#"> Wi-Fi роутеры и маршрутизаторы </a>
-                  </div>
-
-                  <div class="open-category__left__item">
-                    <a href="#"> Инжекторы </a>
-                  </div>
-
-                  <div class="open-category__left__item">
-                    <a href="#"> Повторители сигнала </a>
-                  </div>
-
-                  <div class="open-category__left__item">
-                    <a href="#"> Прочее сетевое оборудование </a>
-                  </div>
-
-                  <div class="open-category__left__item">
-                    <a href="#"> Сетевой кабель (Ethernet) </a>
-                  </div>
+                <div class="cet-items-wrapper" v-for="item in headerCategorysInsaydes" :key="item">
+                  <h1 class="categor-name">{{ item?.name }}</h1>
+                  <div class="categor-slug-wrap">
+                    <NuxtLink class="categor-slug" :to="`/categorys/${sl?.slug}`" v-for="sl in item?.categories " :key="sl">{{ sl?.name }}</NuxtLink></div>
                 </div>
               </div>
             </div>
@@ -424,12 +330,12 @@
             /></a>
           </div>
           <div class="col-center">
-            <p>График работы колл-центра Понедельник - Суббота: 9:00–18:00</p>
+            <p>{{ callCenterInfo?.call_center_working_house }}</p>
           </div>
           <div class="col-center-number">
             <p>
-              Колл-центр:
-              <span> + 998 (71) 205-93-93</span>
+              {{ t("CallCenter") }}:
+              <span>{{ callCenterInfo?.call_center_phone }}</span>
             </p>
           </div>
 
@@ -554,35 +460,23 @@
 
         <div class="footer__categor">
           <div class="footer__categor__list">
-            <h1>Категории</h1>
+            <h1>{{ t("buttonCategory") }}</h1>
             <ul>
-              <li><a href="#">Ноутбуки</a></li>
-              <li><a href="#">Игровые кресла</a></li>
-              <li><a href="#">Телефоны</a></li>
-              <li><a href="#">Моноблоки</a></li>
-              <li><a href="#">Модули памяти</a></li>
+              <li v-for="item in headerCategorys" :key="item">
+                <NuxtLink :to="localePath(`/categorys/${item.slug}`)">{{
+                  item?.name
+                }}</NuxtLink>
+              </li>
             </ul>
           </div>
-
           <div class="footer__categor__list">
-            <h1>Общее</h1>
+            <h1>General Information</h1>
             <ul>
-              <li><a href="#">Ноутбуки</a></li>
-              <li><a href="#">Игровые кресла</a></li>
-              <li><a href="#">Телефоны</a></li>
-              <li><a href="#">Моноблоки</a></li>
-              <li><a href="#">Модули памяти</a></li>
-            </ul>
-          </div>
-
-          <div class="footer__categor__list">
-            <h1>Покупателям</h1>
-            <ul>
-              <li><a href="#">Ноутбуки</a></li>
-              <li><a href="#">Игровые кресла</a></li>
-              <li><a href="#">Телефоны</a></li>
-              <li><a href="#">Моноблоки</a></li>
-              <li><a href="#">Модули памяти</a></li>
+              <li v-for="item in deliveryInfo" :key="item">
+                <NuxtLink :to="localePath(`/categorys/${item.slug}`)">{{
+                  item?.name
+                }}</NuxtLink>
+              </li>
             </ul>
           </div>
         </div>
@@ -737,22 +631,30 @@ async function getSavedProduct() {
   store.savedProducts = res?.data;
 }
 async function getUserInfo() {
-  store.loader = true
+  store.loader = true;
   const res = await services.getUserInfo(store.token);
   console.log(res.data);
-store.userInfo = res.data;  
+  store.userInfo = res.data;
   store.openMenu = false;
-  store.loader = false
+  store.loader = false;
 }
 
 const headerCategorys = ref({});
 
 async function getHeaderCategorys() {
-  store.loader = true
-  const res = await services.getHeaderCategorys(searchVal.value, locale.value);
+  store.loader = true;
+  const res = await services.getHeaderCategorys(locale.value);
   headerCategorys.value = res.data;
   console.log(res);
-  store.loader = false
+  store.loader = false;
+}
+
+const headerCategorysInsaydes = ref({})
+
+async function headerCategorysIns() {
+  const res = await services.headerCategorys()
+  headerCategorysInsaydes.value = res?.data
+  console.log(res)
 }
 
 const searchVal = ref("");
@@ -766,32 +668,45 @@ async function searchProduct() {
 const categorysProducts = ref({});
 
 async function categorys() {
-  store.loader = true
+  store.loader = true;
   const res = await services.categorys(searchVal.value, locale.value);
   categorysProducts.value = res.data;
-  console.log(res)
-  store.loader = false
+  console.log(res);
+  store.loader = false;
 }
 
-const deliveryInfo = ref({})
+const deliveryInfo = ref({});
 
- async function infoDelivery() {
-  const res = await services.deliveryInfo(locale.value)
-  deliveryInfo.value = res?.data
-  console.log(res)
+async function infoDelivery() {
+  const res = await services.deliveryInfo(locale.value);
+  deliveryInfo.value = res?.data;
+  console.log(res);
 }
 
+infoDelivery();
 
-infoDelivery()
+const callCenterInfo = ref({});
 
-watch(()=> locale.value, ()=> {
-  infoDelivery()
+const callCenter = async function () {
+  const res = await services.callCenter(locale.value);
+  callCenterInfo.value = res?.data;
+  console.log(res);
+};
+
+callCenter();
+
+watch(
+  () => locale.value,
+  () => {
+    infoDelivery();
+    categorys();
+  }
+);
+
+onMounted(() => {
   categorys();
-})
-
-onMounted(()=> {
-  categorys();
-})
+});
+headerCategorysIns()
 getHeaderCategorys();
 getUserInfo();
 getSavedProduct();
@@ -838,6 +753,18 @@ getSavedProduct();
   top: -11px;
   right: 11px;
 }
+.categor-slug-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 20px;
+  margin-left: -10px;
+}
+.categor-name {
+  font-weight: 400;
+  font-size: 20px !important;
+}
 .list-lang {
   display: flex;
   flex-direction: column;
@@ -851,6 +778,12 @@ getSavedProduct();
   padding: 5px 10px 10px;
   border-radius: 0 0 10px 10px;
   animation: langAnim 0.3s forwards;
+}
+
+.categor-slug {
+  font-weight: 400;
+  font-size: 18px;
+  color: #000;
 }
 
 @keyframes langAnim {

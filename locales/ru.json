@@ -16,5 +16,22 @@
     "cartText": "Ваша Корзина Пуста!",
     "buttonHeader": "Поиск",
     "buttonCategory": "Категории",
-    "moreDetailes": "Подробнее"
+    "moreDetailes": "Подробнее",
+    "GeneralInformation": "Общая информация",
+    "AnyQuestions": "Any questions?",
+    "phone": "Телефон",
+    "telegram": "Телеграм",
+    "gmail": "Электронная почта",
+    "delivery": "Доставка",
+    "priceDelivery": "Бесплатно",
+    "CallCenter": "Колл-центр",
+    "PaymentMethod": "Способ оплаты",
+    "Cash": "Наличные",
+    "UponDelivery": "При Доставке",
+    "TransferWithVAT": "Перечислением с НДС",
+    "BuyNow": "Купить сейчас",
+    "Instock": "В наличии",
+    "pieces": "шт",
+    "filterPrice": "Цена",
+    "money": "Сум"
 }

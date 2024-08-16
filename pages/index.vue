@@ -237,13 +237,6 @@ async function getBarands() {
   brands.value = res.data;
   console.log(res);
 }
-
-const callCenter = async function() {
-  const res = await services.callCenter(locale.value)
-  console.log(res)
-}
-
-callCenter()
 getBarands();
 bannersBody();
 cheapProduct();

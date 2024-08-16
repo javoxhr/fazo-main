@@ -16,5 +16,22 @@
     "cartText": "Your Cart is Empty!",
     "buttonHeader": "Search",
     "buttonCategory": "Categories",
-    "moreDetailes": "more details"
+    "moreDetailes": "more details",
+    "GeneralInformation": "General Information",
+    "AnyQuestions": "Any questions?",
+    "phone": "Phone",
+    "telegram": "Telegram",
+    "gmail": "emil",
+    "delivery": "delivery",
+    "priceDelivery": "Free",
+    "CallCenter": "Call-center",
+    "PaymentMethod": "Payment method",
+    "Cash": "Cash",
+    "UponDelivery": "Upon Delivery",
+    "TransferWithVAT": "Transfer with VAT",
+    "BuyNow": "Buy now",
+    "Instock": "In stock",
+    "pieces": "pieces",
+    "filterPrice": "Price",
+    "money": "So'm"
 }

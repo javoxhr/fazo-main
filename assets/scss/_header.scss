@@ -297,13 +297,16 @@
                 &:hover {
                     background: #F2F2F2;
                 }
-                a {
+                button {
                     display: flex;
                     align-items: center;
                     gap: 15px;
                     font-weight: 400;
                     font-size: 16px;
                     color: $sub-info-color;
+                    border: none;
+                    background: none;
+                    cursor: pointer;
                     img {
                         &:last-child {
                             margin-left: auto;
@@ -327,6 +330,7 @@
         .cet-items-wrapper {
             display: flex;
             flex-direction: column;
+            align-items: flex-start;
             gap: 10px;
         }
     }

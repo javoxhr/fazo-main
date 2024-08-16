@@ -1,5 +1,5 @@
 .buy {
-    padding: 35px 0;
+    padding: 35px 0 140px;
     .container {
         display: flex;
         align-items: flex-start;
@@ -109,9 +109,13 @@
                 justify-content: space-between;
 
                 h1 {
+                    width: 200px;
                     font-weight: 400;
                     font-size: 16px;
                     color: $sub-info-color;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
 
                 span {
@@ -261,7 +265,7 @@
         }
         &__deliver-btns {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 30px;
             margin-top: 15px;
             .deliver-adres {
@@ -269,6 +273,7 @@
                 max-width: 435px;
                 padding: 10px 22px;
                 border: 1px solid #E0E0E0;
+                cursor: pointer;
                 margin-top: 15px;
                 position: relative;
                 img {
@@ -378,7 +383,6 @@
     .buy {
         .container {
             flex-direction: column;
-            gap: 50px;
         }
         &__order-total {
             max-width: 100%;
@@ -402,6 +406,10 @@
             }
         }
     }
+}
+
+.deliver-adres-wrap {
+    width: 100%;
 }
 
 @media screen and (max-width: 768px) {

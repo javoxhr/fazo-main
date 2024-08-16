@@ -16,5 +16,22 @@
     "cartText": "Savatingiz boʻsh!",
     "buttonHeader": "Qidiruv",
     "buttonCategory": "Kategoriyalar",
-    "moreDetailes": "Batafsil"
+    "moreDetailes": "Batafsil",
+    "GeneralInformation": "Umumiy ma'lumot ",
+    "AnyQuestions": "Savollaringiz bormi? ",
+    "phone": "Telefon",
+    "telegram": "Telegram",
+    "gmail": "Elektron manzil",
+    "delivery": "Yetgazib berish",
+    "priceDelivery": "Bepul",
+    "CallCenter": "Qo'ng'iroqlar-markazi",
+    "PaymentMethod": "To'lov usuli",
+    "Cash": "Naqd pul",
+    "UponDelivery": "Yetkazib berishdan keyin",
+    "TransferWithVAT": "QQS bilan o'tkazish",
+    "BuyNow": "Hozir xarid qilish",
+    "Instock": "sotuvda",
+    "pieces": "dona",
+    "filterPrice": "Narxi",
+    "money": "So'm"
 }

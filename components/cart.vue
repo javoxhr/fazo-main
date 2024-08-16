@@ -29,7 +29,9 @@
                 <span>Итого {{ store.cart.length }} Товары</span>
                 <h2>{{ totalProduct }} Сум</h2>
               </div>
-              <button>Покупка</button>
+              <NuxtLink to="/order" @click="store.showCart = false">
+                <button>Покупка</button>
+              </NuxtLink>
             </div>
           </div>
         </div>

@@ -99,14 +99,14 @@
             </div>
           </div>
           <span class="product-quantitiy"
-            >В наличии: <span>{{ detail?.product?.residue_store }}</span
-            ><span>шт</span></span
+            >{{ t("Instock") }}: <span>{{ detail?.product?.residue_store }}</span
+            ><span>{{ t("pieces") }}</span></span
           >
           <div class="detail__text-wrapper__buy-btn">
-            <button>Купить сейчас</button>
+            <button>{{ t("BuyNow") }}</button>
           </div>
           <div class="detail__text-wrapper__info">
-            <span>Общая Информация</span>
+            <span>{{ t("GeneralInformation") }}</span>
             <p>
               {{ detail?.product?.description }}
             </p>
@@ -130,20 +130,20 @@
 
         <div class="detail__info-cards">
           <div class="detail__info-cards__card">
-            <h1><img src="./images/suporte.svg" alt="" />Есть вопросы?</h1>
+            <h1><img src="./images/suporte.svg" alt="" />{{ t("AnyQuestions") }}</h1>
             <div class="detail__items-wrap">
               <div class="detail__items-wrap__item">
-                <span>Телефон:</span>
+                <span>{{ t("phone") }}:</span>
                 <a href="#">+998 99 990 45 27</a>
               </div>
 
               <div class="detail__items-wrap__item">
-                <span>Телеграм:</span>
+                <span>{{t("telegram")}}:</span>
                 <a href="#">@mixel_uz</a>
               </div>
 
               <div class="detail__items-wrap__item">
-                <span>Эл. почта:</span>
+                <span>{{ t("gmail") }}:</span>
                 <a href="#">mixel@emali.uz</a>
               </div>
             </div>
@@ -151,19 +151,19 @@
 
           <div class="detail__deliver-card">
             <h1 class="detail__deliver-card__title">
-              <img src="./images/delivery.svg" alt="" />Доставка:
-              <span>Бесплатно</span>
+              <img src="./images/delivery.svg" alt="" />{{ t("delivery") }}:
+              <span>{{ t("priceDelivery") }}</span>
             </h1>
 
             <h1 class="detail__deliver-card__info-deliver">
-              <img src="./images/wallet.svg" alt="" />Cпособ оплаты:
+              <img src="./images/wallet.svg" alt="" />{{ t("PaymentMethod") }}:
             </h1>
 
             <div class="detail__deliver-card__items-wrap">
               <ul>
-                <li>Наличными (При Доставке)</li>
+                <li>{{ t("Cash") }} ({{ t("UponDelivery") }})</li>
                 <li>Payme / Click</li>
-                <li>Перечислением с НДС</li>
+                <li>{{ t("TransferWithVAT") }}</li>
               </ul>
             </div>
           </div>

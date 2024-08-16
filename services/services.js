@@ -76,8 +76,15 @@ export default {
     getBanners() {
         return $fetch(`${baseUrl.value}banner/web-site-banners`)
     },
-    getHeaderCategorys() {
-        return $fetch(`${baseUrl.value}category-manager/category/header-categories`)
+    getHeaderCategorys(lang) {
+        return $fetch(`${baseUrl.value}category-manager/category/header-categories`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
+    },
+    headerCategorys(s) {
+        return $fetch(`${baseUrl.value}category-manager/category/index?searchKey=${s}`)
     },
     getProductCategory(lang) {
         return $fetch(`${baseUrl.value}product-manager/our-offers/index?parentCategoryKey=smartfon-va-gadjetlar`, {
@@ -111,7 +118,7 @@ export default {
                 productKey: slug,
             },
             body: {
-                
+
             }
         })
     },
@@ -165,11 +172,12 @@ export default {
             }
         })
     },
-    getCategorysProducts(slug, lang) {
-        return $fetch(`https://api.mtdmarket.uz/api/product-manager/category-product/category?&&page=1&slugKey=${slug}&searchKey=&maxPrice=&minPrice=&priceSort=&nameSort=`, {
+    getCategorysProducts(params, lang) {
+        return $fetch(`${baseUrl.value}product-manager/category-product/category?${params}`, {
             headers: {
                 "Accept-Language": lang
-            }
+            },
+
         })
     },
     deliveryInfo(lang) {
@@ -178,6 +186,15 @@ export default {
                 "Accept-Language": lang
             }
         })
+    },
+    regions() {
+        return $fetch(`${baseUrl.value}order-manager/region/index`)
+    },
+    regionDist(id) {
+        return $fetch(`${baseUrl.value}order-manager/region/districts?region_id=${id}`)
+    },
+    paymentTypes() {
+        return $fetch(`${baseUrl.value}order-manager/store/payment-types`)
     },
     callCenter(lang) {
         return $fetch(`${baseUrl.value}contact-us/about`, {
