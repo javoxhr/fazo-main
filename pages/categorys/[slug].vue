@@ -60,7 +60,7 @@
                 <input
                   type="checkbox"
                   :value="brand.id"
-                  v-model="selectedBrands"
+                  @change="selectBrand(brand.id)"
                 />
                 <span>{{ brand.name }}</span>
               </li>
@@ -132,20 +132,13 @@
         </div>
       </div>
     </div>
-    <!-- Сообщение о загрузке или отсутствующих данных -->
-    <div v-if="!store.loader && !category?.products?.items?.length">
-      <p>Нет доступных продуктов.</p>
-    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch } from 'vue';
 import Slider from 'primevue/slider';
-import { useRoute } from 'vue-router';
 import { useStore } from '~/store/store';
 import services from '~/services/services';
-import { useI18n } from 'vue-i18n';
 
 const { slug } = useRoute().params;
 const { locale, t } = useI18n();
@@ -158,9 +151,8 @@ const selectedAssigns = ref([]);
 const store = useStore();
 const category = ref({});
 
-// Установим начальные значения
 const minPrice = ref(0);
-const maxPrice = ref(100000);
+const maxPrice = ref(0);
 const value = ref([maxPrice.value, minPrice.value]);
 
 const characterFilterVisibility = reactive({});
@@ -172,7 +164,9 @@ async function getCategorysProduct() {
   params.append('slugKey', slug);
   params.append('maxPrice', value.value[0]);
   params.append('minPrice', value.value[1]);
-
+  selectedBrands.value.forEach((id) => {
+    params.append('brandIds[]', id);
+  });
   selectedAssigns.value.forEach(({ id, value }) => {
     params.append(`filter[${id}][]`, value);
   });
@@ -184,6 +178,7 @@ async function getCategorysProduct() {
     minPrice.value = res?.data?.minPrice || 0;
     maxPrice.value = res?.data?.maxPrice || 100000;
     value.value = [maxPrice.value, minPrice.value];
+    console.log(res)
 
     res.data.characters.forEach((character) => {
       characterFilterVisibility[character.characterId] = false;
@@ -209,6 +204,15 @@ function slectCharacter(id, value) {
   }
 }
 
+function selectBrand(id) {
+  const index = selectedBrands.value.findIndex(el => el === id);
+  if (index === -1) {
+    selectedBrands.value.push(id);
+  } else {
+    selectedBrands.value.splice(index, 1);
+  }
+}
+
 onMounted(() => {
   getCategorysProduct();
 });
@@ -224,7 +228,7 @@ watch([minPrice, maxPrice], ([newMin, newMax]) => {
 
 <style lang="scss" scoped>
 .filter-card {
-  width: 230px;
+  width: 100%;
 }
 .arrow-filter-item {
   cursor: pointer;

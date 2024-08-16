@@ -180,13 +180,6 @@ export default {
 
         })
     },
-    deliveryInfo(lang) {
-        return $fetch("https://api.mtdmarket.uz/api/page-info/category", {
-            headers: {
-                "Accept-Language": lang
-            }
-        })
-    },
     regions() {
         return $fetch(`${baseUrl.value}order-manager/region/index`)
     },
@@ -195,6 +188,12 @@ export default {
     },
     paymentTypes() {
         return $fetch(`${baseUrl.value}order-manager/store/payment-types`)
+    },
+    pageCategory() {
+        return $fetch(`${baseUrl.value}page-info/category`)
+    },
+    pageCategoryDetail(id) {
+        return $fetch(`${baseUrl.value}page-info/category-detail?category_id=${id}`)
     },
     callCenter(lang) {
         return $fetch(`${baseUrl.value}contact-us/about`, {

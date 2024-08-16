@@ -14,8 +14,8 @@
         <div class="container">
           <nav class="header-top__list">
             <ul class="header-top-list">
-              <li v-for="item in deliveryInfo" :key="item">
-                <NuxtLink to="/">{{ item?.name }}</NuxtLink>
+              <li v-for="item in pageCategoryInfo" :key="item" :itemId="item">
+                <NuxtLink :to="`/delivery/${item?.id}`">{{ item?.name }}</NuxtLink>
               </li>
             </ul>
           </nav>
@@ -230,13 +230,13 @@
               <div class="open-category__left">
                 <div class="open-category__left__item" v-for="item in headerCategorys" :key="item">
                   <button href="#">
-                    <img
+                    <img width="45px"
                       :src="item?.iconUrl"
                       alt=""
                     />
-                    {{ item?.name }}
-                    <img src="@/assets/images/png/category-arrow.png" alt="" />
+                    {{ item?.name}}
                   </button>
+                  <img src="@/assets/images/png/category-arrow.png" alt="" />
                 </div>
               </div>
 
@@ -665,6 +665,12 @@ async function searchProduct() {
   searchList.value = res.data;
 }
 
+const categoryTop = reactive({})
+
+const topCtaegoryItemTop = function(itemId) {
+  categoryTop[itemId] = !categoryTop[itemId]
+}
+
 const categorysProducts = ref({});
 
 async function categorys() {
@@ -675,16 +681,6 @@ async function categorys() {
   store.loader = false;
 }
 
-const deliveryInfo = ref({});
-
-async function infoDelivery() {
-  const res = await services.deliveryInfo(locale.value);
-  deliveryInfo.value = res?.data;
-  console.log(res);
-}
-
-infoDelivery();
-
 const callCenterInfo = ref({});
 
 const callCenter = async function () {
@@ -692,6 +688,21 @@ const callCenter = async function () {
   callCenterInfo.value = res?.data;
   console.log(res);
 };
+
+const pageCategoryInfo = ref({})
+
+const pageId = ref()
+
+const pageCtegory = async function() {
+  const res = await services.pageCategory()
+  pageCategoryInfo.value = res?.data
+  res.data.forEach((el)=> {
+    console.log(el?.id)
+  })
+  console.log(res?.data)
+}
+
+pageCtegory()
 
 callCenter();
 

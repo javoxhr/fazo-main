@@ -289,10 +289,14 @@
         &__left {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 20px;
             &__item {
-                padding: 8px 15px;
+                width: 400px;
+                padding: 8px 20px;
                 border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
                 cursor: pointer;
                 &:hover {
                     background: #F2F2F2;
@@ -300,7 +304,7 @@
                 button {
                     display: flex;
                     align-items: center;
-                    gap: 15px;
+                    gap: 20px;
                     font-weight: 400;
                     font-size: 16px;
                     color: $sub-info-color;
