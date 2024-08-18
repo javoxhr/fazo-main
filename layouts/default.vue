@@ -15,7 +15,9 @@
           <nav class="header-top__list">
             <ul class="header-top-list">
               <li v-for="item in pageCategoryInfo" :key="item" :itemId="item">
-                <NuxtLink :to="`/delivery/${item?.id}`">{{ item?.name }}</NuxtLink>
+                <NuxtLink :to="`/delivery/${item?.id}`">{{
+                  item?.name
+                }}</NuxtLink>
               </li>
             </ul>
           </nav>
@@ -94,7 +96,7 @@
         </div>
         <div class="container">
           <div class="logo">
-            <NuxtLink :to="localePath('/')"
+            <NuxtLink :to="localePath('/')" @click="store.txtWrp = false"
               ><img src="@/assets/images/svg/loco.svg" alt=""
             /></NuxtLink>
           </div>
@@ -214,7 +216,7 @@
           <nav class="header-category__list">
             <ul>
               <li v-for="list in headerCategorys" :key="list">
-                <NuxtLink :to="localePath(`/categorys/${list.slug}`)">{{
+                <NuxtLink @click="store.txtWrp = false" :to="localePath(`/categorys/${list.slug}`)">{{
                   list?.name
                 }}</NuxtLink>
               </li>
@@ -228,23 +230,37 @@
           <div class="container">
             <div class="open-category__wrapper">
               <div class="open-category__left">
-                <div class="open-category__left__item" v-for="item in headerCategorys" :key="item">
+                <div
+                  class="open-category__left__item"
+                  v-for="item in headerCategorys"
+                  :key="item"
+                  @click="topCtaegoryItemTop(item?.id)"
+                >
                   <button href="#">
-                    <img width="45px"
-                      :src="item?.iconUrl"
-                      alt=""
-                    />
-                    {{ item?.name}}
+                    <img width="45px" :src="item?.iconUrl" alt="" />
+                    {{ item?.name }}
                   </button>
                   <img src="@/assets/images/png/category-arrow.png" alt="" />
                 </div>
               </div>
 
               <div class="open-category-cet">
-                <div class="cet-items-wrapper" v-for="item in headerCategorysInsaydes" :key="item">
-                  <h1 class="categor-name">{{ item?.name }}</h1>
-                  <div class="categor-slug-wrap">
-                    <NuxtLink class="categor-slug" :to="`/categorys/${sl?.slug}`" v-for="sl in item?.categories " :key="sl">{{ sl?.name }}</NuxtLink></div>
+                <div
+                  class="cet-items-wrapper"
+                  v-for="item in headerCategorysInsaydes"
+                  :key="item"
+                >
+                  <div class="categor-slug-wrap" v-show="categoryTop[item.id]">
+                    <h1 class="categor-name">{{ item?.name }}</h1>
+                    <NuxtLink
+                      class="categor-slug"
+                      :to="`/categorys/${sl?.slug}`"
+                      v-for="sl in item?.categories"
+                      :key="sl"
+                      >
+                      {{ sl?.name }}</NuxtLink
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -292,24 +308,47 @@
 
       <div class="menu-bottom">
         <div class="container">
-          <button>
-            <img src="@/assets/images/svg/menu-menu.svg" alt="" />
-          </button>
-          <button>
-            <img src="@/assets/images/svg/menu-bottom-cart.svg" alt="" />
-          </button>
-          <button>
+          <NuxtLink :to="localePath('/')" class="bottom-item">
             <img src="@/assets/images/svg/bottom-menu-home.svg" alt="" />
-          </button>
-          <button>
+            <span>home</span>
+          </NuxtLink>
+
+          <NuxtLink class="bottom-item" @click="store.showCart = !store.showCart">
+            <img src="@/assets/images/svg/menu-bottom-cart.svg" alt="" />
+            <span class="bt-item-saved-tot-cart">{{ productQuantity }}</span>
+            <span>{{ t("Cart") }}</span>
+          </NuxtLink>
+
+          <NuxtLink class="bottom-item" @click="categoryOpen = !categoryOpen">
+            <img src="@/assets/images/svg/menu-menu.svg" alt="" />
+            <span>categories</span>
+          </NuxtLink>
+
+          <NuxtLink :to="localePath('/cabinet')" class="bottom-item" v-if="store.token">
             <img src="@/assets/images/svg/user.svg" alt="" />
-          </button>
-          <button>
+            <span>{{ store?.userInfo?.firstname}}</span>
+          </NuxtLink>
+
+          <NuxtLink class="bottom-item" @click="store.registerOpen = !store.registerOpen" v-if="!store.token">
+            <img src="@/assets/images/svg/user.svg" alt="" />
+            <span>{{ t("Login") }}</span>
+          </NuxtLink>
+
+          <NuxtLink :to="localePath('/saved')" class="bottom-item" v-if="store.token">
             <img
               src="@/assets/images/svg/8542029_heart_love_like_icon.svg"
               alt=""
             />
-          </button>
+            <span>saved</span>
+            <span class="bt-item-saved-tot">{{ store.savedProducts?.items?.length }}</span>
+          </NuxtLink>
+          <NuxtLink class="bottom-item" @click="store.registerOpen = !store.registerOpen" v-if="!store?.token">
+            <img
+              src="@/assets/images/svg/8542029_heart_love_like_icon.svg"
+              alt=""
+            />
+            <span>saved</span>
+          </NuxtLink>
         </div>
       </div>
     </header>
@@ -649,12 +688,12 @@ async function getHeaderCategorys() {
   store.loader = false;
 }
 
-const headerCategorysInsaydes = ref({})
+const headerCategorysInsaydes = ref({});
 
 async function headerCategorysIns() {
-  const res = await services.headerCategorys()
-  headerCategorysInsaydes.value = res?.data
-  console.log(res)
+  const res = await services.headerCategorys();
+  headerCategorysInsaydes.value = res?.data;
+  console.log(res);
 }
 
 const searchVal = ref("");
@@ -665,11 +704,11 @@ async function searchProduct() {
   searchList.value = res.data;
 }
 
-const categoryTop = reactive({})
+const categoryTop = reactive({});
 
-const topCtaegoryItemTop = function(itemId) {
-  categoryTop[itemId] = !categoryTop[itemId]
-}
+const topCtaegoryItemTop = function (itemId) {
+  categoryTop[itemId] = !categoryTop[itemId];
+};
 
 const categorysProducts = ref({});
 
@@ -681,6 +720,7 @@ async function categorys() {
   store.loader = false;
 }
 
+
 const callCenterInfo = ref({});
 
 const callCenter = async function () {
@@ -689,22 +729,28 @@ const callCenter = async function () {
   console.log(res);
 };
 
-const pageCategoryInfo = ref({})
+const pageCategoryInfo = ref({});
 
-const pageId = ref()
+const pageId = ref();
 
-const pageCtegory = async function() {
-  const res = await services.pageCategory()
-  pageCategoryInfo.value = res?.data
-  res.data.forEach((el)=> {
-    console.log(el?.id)
+const pageCtegory = async function () {
+  const res = await services.pageCategory();
+  pageCategoryInfo.value = res?.data;
+  res?.data?.forEach((el)=> {
+    categoryTop[el.id] = false
   })
-  console.log(res?.data)
-}
+  console.log(res?.data);
+};
 
-pageCtegory()
-
-callCenter();
+onMounted(() => {
+  categorys();
+  pageCtegory();
+  callCenter();
+  headerCategorysIns();
+  getHeaderCategorys();
+  getUserInfo();
+  getSavedProduct();
+});
 
 watch(
   () => locale.value,
@@ -713,17 +759,59 @@ watch(
     categorys();
   }
 );
-
-onMounted(() => {
-  categorys();
-});
-headerCategorysIns()
-getHeaderCategorys();
-getUserInfo();
-getSavedProduct();
 </script>
 
 <style lang="scss" scoped>
+.menu-bottom {
+  .conatiner {
+    position: relative;
+  }
+}
+.bottom-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  .bt-item-saved-tot-cart {
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 12px;
+    background: rgb(0, 123, 255);
+    color: #fff;
+    position: absolute;
+    top: -13px;
+    right: 0;
+  }
+  .bt-item-saved-tot {
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 12px;
+    background: rgb(0, 123, 255);
+    color: #fff;
+    position: absolute;
+    top: -13px;
+    right: 0px;
+  }
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    color: #909090;
+  }
+  img {
+    width: 20px;
+  }
+}
 .Notification {
   position: fixed;
   top: 30px;

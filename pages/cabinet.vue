@@ -11,7 +11,6 @@
                 <NuxtLink to="/">Главная</NuxtLink
                 ><img src="./images/chevron-right.svg" alt="" />
               </li>
-              <li><a href="#">Личный кобинет</a></li>
             </ul>
             <button class="manneger" @click="store.servic = true">Техподдержка</button>
           </nav>

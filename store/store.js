@@ -26,6 +26,8 @@ export const useStore = defineStore("store", () => {
     const update = ref(false)
     const servic = ref(false)
     const clearStorage = ref(false)
+    const txtWrp = ref(false)
+    const filterSwitch = ref(false)
     return {
         savedProducts,
         registerCode,
@@ -47,5 +49,7 @@ export const useStore = defineStore("store", () => {
         update,
         servic,
         clearStorage,
+        txtWrp,
+        filterSwitch,
     }
 })

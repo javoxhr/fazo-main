@@ -37,20 +37,22 @@
       </div>
     </div>
 
-    <!-- <div class="menu-hero">
-      <Swiper
-        :modules="[SwiperNavigation, SwiperAutoplay]"
+    <div class="menu-hero">
+      <Swiper class="swiper-menu-banner"
+        :modules="[SwiperNavigation, SwiperAutoplay, SwiperPagination]"
         :loop="true"
+        :pagination="true"
         :autoplay="{
           delay: 3000,
-          disableOnInteraction: true,
+          disableOnInteraction: false,
         }"
       >
         <SwiperSlide v-for="banner in banners?.data" :key="banner">
-          <img :src="banner?.imageUrl" alt="" />
+          <img style="width: 100%;" :src="banner?.imageUrl" alt="" />
         </SwiperSlide>
       </Swiper>
-    </div> -->
+    </div>
+
     <div class="offers">
       <div class="container">
         <div class="offers__text-wrapper">
@@ -69,21 +71,18 @@
 
     <div class="popular-cards">
       <div class="container">
-        <h2>{{ t("PopularCategories") }}</h2>
-        <button class="popular-nav prev">></button>
-        <button class="popular-nav next">></button>
+        <h2 class="popular-cat-title">{{ t("PopularCategories") }}</h2>
+        <button class="popular-nav prevEl">></button>
+        <button class="popular-nav nextEl">></button>
         <div class="popular-cards-wrapper">
           <Swiper
             class="popular-swiper"
             :modules="[SwiperNavigation]"
             :slides-per-view="3"
-            :space-between="30"
-            :loop="true"
-            :autoplay="{ delay: 0, disableOnInteraction: false }"
-            :speed="1000"
+            :space-between="20"
             :navigation="{
-              prevEl: '.prev',
-              nextEl: '.next',
+              prevEl: '.prevEl',
+              nextEl: '.nextEl',
             }"
           >
             <SwiperSlide
@@ -126,7 +125,9 @@
             </div>
             <div class="body-swiper-price-wrapper">
               <span>{{ item?.price }}</span>
-              <a href="/" target="_blank" class="nxl">{{ t("moreDetailes") }}</a>
+              <a href="/" target="_blank" class="nxl">{{
+                t("moreDetailes")
+              }}</a>
             </div>
           </SwiperSlide>
         </Swiper>
@@ -161,17 +162,22 @@
         </div>
 
         <div class="brand-swiper-navigation">
-            <button class="brand-prev">></button>
-            <button class="brand-next">></button>
-          </div>
+          <button class="brand-prev">></button>
+          <button class="brand-next">></button>
+        </div>
 
         <div class="breand__cards-wrapper">
-          <Swiper class="brand-swiper" :slides-per-view="5" :modules="[SwiperNavigation]" :navigation="{
-            prevEl: '.brand-prev',
-            nextEl: '.brand-next',
-          }">
+          <Swiper
+            class="brand-swiper"
+            :slides-per-view="5"
+            :modules="[SwiperNavigation]"
+            :navigation="{
+              prevEl: '.brand-prev',
+              nextEl: '.brand-next',
+            }"
+          >
             <SwiperSlide v-for="item in brands" :key="item">
-               <brandCard :brand="item?.imageUrl"/>
+              <brandCard :brand="item?.imageUrl" />
             </SwiperSlide>
           </Swiper>
         </div>
@@ -237,12 +243,14 @@ async function getBarands() {
   brands.value = res.data;
   console.log(res);
 }
-getBarands();
-bannersBody();
-cheapProduct();
-popularCategory();
-getProductCategory();
-getBanners();
+onMounted(() => {
+  getBarands();
+  bannersBody();
+  cheapProduct();
+  popularCategory();
+  getProductCategory();
+  getBanners();
+});
 </script>
 
 <style lang="scss">
@@ -281,8 +289,19 @@ getBanners();
 .popular-cards {
   padding: 70px 0;
   position: relative;
+  @media screen and (max-width: 700px) {
+    padding: 40px 0;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 30px 0;
+  }
   .container {
     position: relative;
+  }
+}
+@media screen and (max-width: 750px) {
+  .popular-cat-title {
+    font-size: 16px;
   }
 }
 .popular-nav {
@@ -302,10 +321,19 @@ getBanners();
   z-index: 5;
   right: -10px;
   bottom: 30px;
+  @media screen and (max-width: 850px) {
+    display: none;
+  }
+  @media screen and (max-width: 1287px) {
+      right: 0;
+    }
   &:nth-child(2) {
     bottom: 30px;
     left: -10px;
     rotate: 180deg;
+    @media screen and (max-width: 1287px) {
+      left: 0;
+    }
   }
   &:hover {
     opacity: 0.9;

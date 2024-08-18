@@ -3,12 +3,15 @@
     <loader v-if="store.loader" />
     <div class="container">
       <h1 class="page-name">{{ t("Saved") }}</h1>
-      <div class="cards-wrapper">
+      <div class="cards-wrapper" v-if="store.savedProducts?.items?.length">
         <ProductCard
           v-for="item in store.savedProducts?.items"
           :key="item"
           :product="item"
         />
+      </div>
+      <div class="not-product-in-saved" v-if="!store.savedProducts?.items?.length">
+        <h1>don't have product in saved! 😓</h1>
       </div>
     </div>
   </div>
@@ -41,6 +44,22 @@ getSavedProduct();
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   padding: 40px 0;
+}
+
+.not-product-in-saved {
+  width: 100%;
+  height: 300px;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    font-weight: 500;
+    font-size: 25px;
+    @media screen and (max-width: 500px) {
+      font-size: 16px;
+    }
+  }
 }
 
 @media screen and (max-width: 1287px) {
