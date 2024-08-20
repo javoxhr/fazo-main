@@ -164,6 +164,10 @@
                 align-items: center;
                 gap: 50px;
                 margin-top: 30px;
+                @media screen and (max-width: 400px) {
+                    gap: 30px;
+                    margin-top: 10px;
+                }
                 button {
                     border: none;
                     background: none;
@@ -284,6 +288,9 @@
                     }
                     .sale-price {
                         font-size: 16px;
+                        @media screen and (max-width: 405px) {
+                            font-size: 13px;
+                        }
                     }
                 }
                 &__info {

@@ -201,6 +201,11 @@ const createSaved = async () => {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  * {
+    @media screen and (max-width: 600px) {
+      font-size: 10px;
+    }
+  }
 }
 .card-title {
   font-weight: 600;
@@ -210,6 +215,9 @@ const createSaved = async () => {
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: center;
+  @media screen and (max-width: 600px) {
+    width: 100px;
+  }
   &:hover {
     color: rgb(0, 123, 255);
   }

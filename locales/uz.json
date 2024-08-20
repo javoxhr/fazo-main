@@ -33,5 +33,16 @@
     "Instock": "sotuvda",
     "pieces": "dona",
     "filterPrice": "Narxi",
-    "money": "So'm"
+    "money": "So'm",
+    "brand": "Brend",
+    "total": "Jami",
+    "prod": "Dona",
+    "purchase": "Sotib olish",
+    "TotalPayable": "Jami to'lov",
+    "yourData": "Ma'lumotlaringiz",
+    "YourOrder": "Sizning buyurtmalaringiz",
+    "SelectPaymentMethod": "To'lov usulini tanlang",
+    "MethoDofObtaining": "Qabul qilish usuli",
+    "YourCity": "Sizning shahringiz",
+    "EnterYourDeliveryAddress": "Yetkazib berish manzilingizni kiriting"
 }

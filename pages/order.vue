@@ -3,13 +3,13 @@
     <div class="buy">
       <div class="container">
         <div class="buy__left">
-          <h1 class="buy__left__title">Покупка</h1>
+          <h1 class="buy__left__title">{{ t("purchase") }}</h1>
           <div class="buy__left__edit">
             <div class="your-deliver">
               <span>1</span>
-              <h3>Ваш заказ</h3>
+              <h3>{{ t("YourOrder") }}</h3>
             </div>
-            <button>Изменить</button>
+            <!-- <button>Изменить</button> -->
           </div>
 
           <div class="buy__left__products-wrapper">
@@ -22,8 +22,8 @@
 
           <div class="credit-card">
             <div class="crediat-top">
-              <span>3</span>
-              <h3>Выберите способ оплаты</h3>
+              <span>2</span>
+              <h3>{{ t("SelectPaymentMethod") }}</h3>
             </div>
             <div class="credit-card__cards-wrap">
               <div class="card-radio">
@@ -70,18 +70,18 @@
 
             <div class="method-of-obtaining">
               <div class="method-of-o-info-wrap">
-                <span class="method-of-o-number">4</span>
-                <h3>Способ получения</h3>
+                <span class="method-of-o-number">3</span>
+                <h3>{{ t("MethoDofObtaining") }}</h3>
               </div>
               <div class="method-of-obtaining__wrapper">
-                <span>Ваш город</span>
+                <span>{{ t("YourCity") }}</span>
                 <label class="location">
                   <input type="radio" />
                   <h2>Ташкент</h2>
                   <span>Доставка Fazo </span>
                 </label>
 
-                <span class="deliver-adress">Укажите адрес доставки</span>
+                <span class="deliver-adress">{{ t("EnterYourDeliveryAddress") }}</span>
 
                 <div class="buy__left__deliver-btns">
                   <div class="deliver-adres-wrap">
@@ -131,15 +131,14 @@
         </div>
 
         <div class="buy__order-total">
-          <h1 class="buy__order-total__title">Ваши данные</h1>
+          <h1 class="buy__order-total__title">{{ t("yourData") }}</h1>
           <div class="buy__order-total__wrapper">
             <div class="count-product">
-              <span>Итого {{ store.cart.length }} шт Товары</span>
+              <span>{{ t("TotalPayable") }} {{ store.cart.length }} {{ t("pieces") }} {{ t("prod") }}</span>
               <h2>{{ allPriceOrder }} cум</h2>
             </div>
             <div class="deliver-free">
-              <span>Доставка</span>
-              <!-- Обновляем отображение суммы доставки -->
+              <span>{{ t("delivery") }}</span>
               <h2
                 v-if="
                   regionDist.length > 0 &&
@@ -152,15 +151,15 @@
                 }}
               </h2>
               
-              <h2 v-else>Бесплатно</h2>
+              <h2 v-else>{{ t("priceDelivery") }}</h2>
             </div>
             <span class="order-total-linie"></span>
             <div class="all-paymet">
-              <span>Всего к оплате</span>
+              <span>{{ t("TotalPayable") }}</span>
               <h2>{{ allPriceOrder }} cум</h2>
             </div>
 
-            <button class="buy__order-total__buy-btn">Оформить покупку</button>
+            <button class="buy__order-total__buy-btn" @click="delivery()">{{ t("purchase") }}</button>
           </div>
         </div>
       </div>
@@ -171,9 +170,10 @@
 <script setup>
 import services from "~/services/services";
 import { useStore } from "~/store/store";
-import { ref, reactive, onMounted, watch, computed } from "vue";
 
 const store = useStore();
+
+const {locale, locales, t} = useI18n()
 
 const regionShow = ref(false);
 const regionDistShow = ref(false);
@@ -221,6 +221,14 @@ const pymentType = ref({})
 const paymentTypes = async function() {
   const res = await services.paymentTypes()
   pymentType.value = res.data
+  console.log(res)
+}
+
+async function delivery() {
+  const body = {
+    'payment_type': 2
+  }
+  const res = await services.delivery(store.token, locale.value, body)
   console.log(res)
 }
 

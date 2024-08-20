@@ -287,11 +287,16 @@
         </div>
 
         <div class="menu__register">
-          <button>
+          <button v-if="!store.token" @click="store.registerOpen = true">
             <span><img src="@/assets/images/svg/man.svg" alt="" /></span>Войти
           </button>
+          <button v-if="store.token">
+            <span><img src="@/assets/images/svg/man.svg" alt="" /></span><NuxtLink style="color: #000;" to="/cabinet">{{  store?.userInfo?.firstname }}</NuxtLink>
+          </button>
+          <button></button>
           <span></span>
-          <button>Регистрация</button>
+          <button @click="store.enterPhone = true" v-if="!store.token">Регистрация</button>
+          <button @click="exitFunc()" v-if="store.token">Выйти</button>
         </div>
 
         <div class="menu__info">
@@ -655,6 +660,12 @@ const { locale, locales, t } = useI18n();
 
 const currentLang = computed(() => locale.value);
 
+const exitFunc = function() {
+  localStorage.clear()
+  window.location.reload(true)
+  window.location.href = '/'
+}
+
 const productQuantity = computed(() => {
   let quantity = 0;
   store.cart.forEach((el) => {
@@ -692,7 +703,7 @@ const headerCategorysInsaydes = ref({});
 
 async function headerCategorysIns() {
   const res = await services.headerCategorys();
-  headerCategorysInsaydes.value = res?.data;
+  headerCategorysInsaydes.value = res?.data
   console.log(res);
 }
 
@@ -705,9 +716,13 @@ async function searchProduct() {
 }
 
 const categoryTop = reactive({});
+const categoryClose = ref()
+
 
 const topCtaegoryItemTop = function (itemId) {
   categoryTop[itemId] = !categoryTop[itemId];
+  console.log(itemId)
+  categoryClose.value = itemId
 };
 
 const categorysProducts = ref({});
@@ -752,11 +767,15 @@ onMounted(() => {
   getSavedProduct();
 });
 
+watch(()=> locale.value, ()=> {
+  categorys();
+  getHeaderCategorys();
+})
+
 watch(
   () => locale.value,
   () => {
     infoDelivery();
-    categorys();
   }
 );
 </script>
@@ -786,7 +805,7 @@ watch(
     color: #fff;
     position: absolute;
     top: -13px;
-    right: 0;
+    right: 7px;
   }
   .bt-item-saved-tot {
     width: 20px;

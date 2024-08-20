@@ -201,5 +201,15 @@ export default {
                 "Accept-Language": lang
             }
         })
+    },
+    delivery(token, lang, body) {
+        return $fetch(`${baseUrl.value}order-manager/order/delivery`, {
+            method: "POST",
+            headers: {
+                "Authorization": token,
+                "Accept-Language": lang,
+            },
+            body: body
+        })
     }
 }

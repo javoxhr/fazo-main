@@ -177,6 +177,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            @media screen and (max-width: 600px) {
+                align-items: flex-start;
+            }
         }
         &__text-wrapper {
             &__title {
@@ -265,6 +268,9 @@
         background: rgb(219, 218, 218);;
         position: absolute;
         top: -10px;
+        @media screen and (max-width: 500px) {
+            width: 100%;
+        }
     }
     h4 {
         font-weight: 400;

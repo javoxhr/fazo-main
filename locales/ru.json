@@ -18,7 +18,7 @@
     "buttonCategory": "Категории",
     "moreDetailes": "Подробнее",
     "GeneralInformation": "Общая информация",
-    "AnyQuestions": "Any questions?",
+    "AnyQuestions": "Есть вопросы?",
     "phone": "Телефон",
     "telegram": "Телеграм",
     "gmail": "Электронная почта",
@@ -33,5 +33,16 @@
     "Instock": "В наличии",
     "pieces": "шт",
     "filterPrice": "Цена",
-    "money": "Сум"
+    "money": "Сум",
+    "brand": "Бренд",
+    "total": "Итого",
+    "prod": "Товары",
+    "purchase": "Покупка",
+    "TotalPayable": "Всего к оплате",
+    "yourData": "Ваши данные",
+    "YourOrder": "Ваш заказы",
+    "SelectPaymentMethod": "Выберите способ оплаты",
+    "MethoDofObtaining": "Способ получения",
+    "YourCity": "Ваш город",
+    "EnterYourDeliveryAddress": "Укажите адрес доставки"
 }

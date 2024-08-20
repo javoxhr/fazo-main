@@ -26,7 +26,7 @@
           <div class="total" v-if="store.cart.length">
             <div class="total-wrapper">
               <div class="total-text-wrapper">
-                <span>Итого {{ store.cart.length }} Товары</span>
+                <span>{{ t("total") }} {{ store.cart.length }} {{ t("prod") }}</span>
                 <h2>{{ totalProduct }} Сум</h2>
               </div>
               <NuxtLink to="/order" @click="store.showCart = false">

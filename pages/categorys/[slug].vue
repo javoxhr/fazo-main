@@ -78,7 +78,7 @@
             style="cursor: pointer"
             @click="brandTog = !brandTog"
           >
-            <h1>Бренд</h1>
+            <h1>{{ t("brand") }}</h1>
             <button
               class="brand-btn"
               :class="{ 'arrow-filter-item-active': brandTog }"
@@ -277,16 +277,16 @@ onMounted(() => {
   getCategorysProduct();
 });
 
-watch(
-  [minPrice, maxPrice],
-  ([newMin, newMax]) => {
-    if (newMin !== undefined && newMax !== undefined) {
-      value.value = [newMax, newMin];
-      getCategorysProduct();
-    }
-  },
-  { immediate: true }
-);
+// watch(
+//   [minPrice, maxPrice],
+//   ([newMin, newMax]) => {
+//     if (newMin !== undefined && newMax !== undefined) {
+//       value.value = [newMax, newMin];
+//       getCategorysProduct();
+//     }
+//   },
+//   { immediate: true }
+// );
 </script>
 
 <style lang="scss">
@@ -329,6 +329,23 @@ watch(
   flex-direction: row;
   background: #fff;
   animation: grid-anim 0.3s forwards;
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+  }
+  * {
+    text-align: left;
+    @media screen and (max-width: 600px) {
+      img {
+        width: 100px;
+        font-size: 14px;
+      }
+    }
+    @media screen and (max-width: 400px) {
+      img {
+        width: 80px;
+      }
+    }
+  }
 }
 
 @keyframes item-anim {

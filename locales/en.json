@@ -33,5 +33,16 @@
     "Instock": "In stock",
     "pieces": "pieces",
     "filterPrice": "Price",
-    "money": "So'm"
+    "money": "So'm",
+    "brand": "Brand",
+    "total": "Total",
+    "prod": "Products",
+    "purchase": "Purchase",
+    "TotalPayable": "Total payable",
+    "yourData": "Your data",
+    "YourOrder": "Your orders",
+    "SelectPaymentMethod": "Select payment method",
+    "MethoDofObtaining": "Method of obtaining",
+    "YourCity": "Your city",
+    "EnterYourDeliveryAddress": "Enter your delivery address"
 }
