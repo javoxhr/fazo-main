@@ -29,13 +29,15 @@ import { useStore } from '~/store/store';
 
 const store = useStore()
 
+const {locale, locales, t} = useI18n()
+
 const {id} = useRoute().params
 
 const detailInfo = ref({})
 
 const pageCategoryDetail = async function() {
     store.loader = true
-    const res = await services.pageCategoryDetail(id)
+    const res = await services.pageCategoryDetail(id, locale.value)
     detailInfo.value = res?.data
     store.loader = false
     console.log(res)
@@ -60,6 +62,9 @@ pageCtegory()
     padding: 10px 0 0;
     border: 1px solid #c9c9c9;
     border-radius: 5px;
+    @media screen and (max-width: 1000px) {
+        width: 100%;
+    }
     h1 {
         font-weight: 500;
         font-size: 25px;
@@ -95,6 +100,9 @@ pageCtegory()
             font-size: 23px;
             color: #444444;
             line-height: 1.2;
+            @media screen and (max-width: 600px) {
+                font-size: 18px;
+            }
         }
         span {
             width: 100%;
@@ -110,5 +118,11 @@ pageCtegory()
     display: flex;
     align-items: flex-start;
     gap: 50px;
+    @media screen and (max-width: 700px) {
+        padding: 30px 0;
+    }
+    @media screen and (max-width: 1000px) {
+        flex-direction: column;
+    }
 }
 </style>

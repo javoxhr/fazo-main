@@ -187,14 +187,24 @@
 </template>
 
 <script setup>
+import { useToast } from "vue-toastification";
 import { useStore } from "~/store/store";
 import ProductCard from "~/components/productCard.vue";
 import services from "~/services/services";
 const { locale, t } = useI18n();
 const store = useStore();
+const taost = useToast()
 
 const banners = ref({});
 const productCategory = ref({});
+
+function notify() {
+  taost.success("Sorovingiz movaqiyatlig bajarildi! Tez orada siz bilan bog'lanamiz")
+}
+
+if(store.deliveryNotif) {
+  notify()
+}
 
 async function getBanners() {
   store.loader = true;

@@ -139,8 +139,8 @@
           </div>
 
           <div class="header-bottom__items">
-            <NuxtLink
-              :to="`${store.userInfo.firstname ? `/cabinet` : '/'}`"
+            <NuxtLink v-if="store.token"
+              :to="localePath('/cabinet')"
               class="header-bottom__items__item"
               @click="
                 store.userInfo.firstname
@@ -149,17 +149,17 @@
               "
             >
               <img src="@/assets/images/svg/man.svg" alt="" />
-              <span
-                >{{
-                  store?.userInfo?.firstname
-                    ? store?.userInfo?.firstname
-                    : `${t("Login")}`
-                }}
-                {{
-                  store?.userInfo?.lastname ? store?.userInfo?.lastname : ""
-                }}</span
-              >
+              <span>{{ store?.userInfo?.firstname }} </span>
             </NuxtLink>
+
+            <button @click="store.registerOpen = true" style="border: none; background: none;"
+              v-if="!store.token"
+              class="header-bottom__items__item"
+            >
+              <img src="@/assets/images/svg/man.svg" alt="" />
+              <span>Login</span>
+            </button>
+            
             <NuxtLink
               to="/saved"
               v-if="store.token"
@@ -206,7 +206,11 @@
       <div class="header-category">
         <div class="container">
           <div class="header-category__main-btn">
-            <button @click="categoryOpen = !categoryOpen">
+            <button
+              @click="
+              categoryInst = false, openCategory= !openCategory
+              "
+            >
               <img src="@/assets/images/svg/category-btn.svg" alt="" />{{
                 t("buttonCategory")
               }}
@@ -216,9 +220,11 @@
           <nav class="header-category__list">
             <ul>
               <li v-for="list in headerCategorys" :key="list">
-                <NuxtLink @click="store.txtWrp = false" :to="localePath(`/categorys/${list.slug}`)">{{
-                  list?.name
-                }}</NuxtLink>
+                <NuxtLink
+                  @click="store.txtWrp = false"
+                  :to="localePath(`/categorys/${list.slug}`)"
+                  >{{ list?.name }}</NuxtLink
+                >
               </li>
             </ul>
           </nav>
@@ -226,7 +232,13 @@
 
         <div class="category-overlay"></div>
 
-        <div class="open-category" v-if="categoryOpen">
+        <div class="open-category" v-if="openCategory">
+          <div class="open-category-header">
+            <div class="container">
+              <h2>Category</h2>
+              <button @click="openCategory = false"><img src="~/assets/images/svg/x.svg" alt=""></button>
+            </div>
+            </div>
           <div class="container">
             <div class="open-category__wrapper">
               <div class="open-category__left">
@@ -234,9 +246,9 @@
                   class="open-category__left__item"
                   v-for="item in headerCategorys"
                   :key="item"
-                  @click="topCtaegoryItemTop(item?.id)"
+                  @click="topCtaegoryItemTop(item?.id), categoryInst = true"
                 >
-                  <button href="#">
+                  <button>
                     <img width="45px" :src="item?.iconUrl" alt="" />
                     {{ item?.name }}
                   </button>
@@ -244,20 +256,26 @@
                 </div>
               </div>
 
-              <div class="open-category-cet">
+              <div class="open-category-cet" v-if="categoryInst">
                 <div
                   class="cet-items-wrapper"
                   v-for="item in headerCategorysInsaydes"
                   :key="item"
                 >
-                  <div class="categor-slug-wrap" v-show="categoryTop[item.id]">
+                  <div
+                    class="categor-slug-wrap"
+                    :style="{
+                      display: categoryClose == item.id ? 'flex' : 'none',
+                    }"
+                  >
                     <h1 class="categor-name">{{ item?.name }}</h1>
                     <NuxtLink
                       class="categor-slug"
-                      :to="`/categorys/${sl?.slug}`"
+                      :to="`/katalog/${sl?.slug}`"
                       v-for="sl in item?.categories"
-                      :key="sl"
-                      >
+                      :key="sl?.id"
+                      @click="openCategory = false"
+                    >
                       {{ sl?.name }}</NuxtLink
                     >
                   </div>
@@ -291,11 +309,16 @@
             <span><img src="@/assets/images/svg/man.svg" alt="" /></span>Войти
           </button>
           <button v-if="store.token">
-            <span><img src="@/assets/images/svg/man.svg" alt="" /></span><NuxtLink style="color: #000;" to="/cabinet">{{  store?.userInfo?.firstname }}</NuxtLink>
+            <span><img src="@/assets/images/svg/man.svg" alt="" /></span
+            ><NuxtLink style="color: #000" to="/cabinet">{{
+              store?.userInfo?.firstname
+            }}</NuxtLink>
           </button>
           <button></button>
           <span></span>
-          <button @click="store.enterPhone = true" v-if="!store.token">Регистрация</button>
+          <button @click="store.enterPhone = true" v-if="!store.token">
+            Регистрация
+          </button>
           <button @click="exitFunc()" v-if="store.token">Выйти</button>
         </div>
 
@@ -305,9 +328,10 @@
         </div>
 
         <div class="menu__lang">
-          <button>Uzb</button>
-          <button>Рус</button>
-          <button>Eng</button>
+          <NuxtLink v-for="{code, name} in locales" :key="code" :to="swithcLocalePath(code)">
+             <button>{{ name }}</button>
+          </NuxtLink>
+
         </div>
       </div>
 
@@ -318,36 +342,57 @@
             <span>home</span>
           </NuxtLink>
 
-          <NuxtLink class="bottom-item" @click="store.showCart = !store.showCart">
+          <NuxtLink
+            class="bottom-item"
+            @click="store.showCart = !store.showCart"
+          >
             <img src="@/assets/images/svg/menu-bottom-cart.svg" alt="" />
             <span class="bt-item-saved-tot-cart">{{ productQuantity }}</span>
             <span>{{ t("Cart") }}</span>
           </NuxtLink>
 
-          <NuxtLink class="bottom-item" @click="categoryOpen = !categoryOpen">
+          <NuxtLink class="bottom-item" @click="openCategory = !openCategory">
             <img src="@/assets/images/svg/menu-menu.svg" alt="" />
             <span>categories</span>
           </NuxtLink>
 
-          <NuxtLink :to="localePath('/cabinet')" class="bottom-item" v-if="store.token">
+          <NuxtLink
+            :to="localePath('/cabinet')"
+            class="bottom-item"
+            v-if="store.token"
+          >
             <img src="@/assets/images/svg/user.svg" alt="" />
-            <span>{{ store?.userInfo?.firstname}}</span>
+            <span>{{ store?.userInfo?.firstname }}</span>
           </NuxtLink>
 
-          <NuxtLink class="bottom-item" @click="store.registerOpen = !store.registerOpen" v-if="!store.token">
+          <NuxtLink
+            class="bottom-item"
+            @click="store.registerOpen = !store.registerOpen"
+            v-if="!store.token"
+          >
             <img src="@/assets/images/svg/user.svg" alt="" />
-            <span>{{ t("Login") }}</span>
+            <span>{{ t("Login") }}</span> 
           </NuxtLink>
-
-          <NuxtLink :to="localePath('/saved')" class="bottom-item" v-if="store.token">
+  
+          <NuxtLink
+            :to="localePath('/saved')"
+            class="bottom-item"
+            v-if="store.token"
+          >
             <img
               src="@/assets/images/svg/8542029_heart_love_like_icon.svg"
               alt=""
             />
             <span>saved</span>
-            <span class="bt-item-saved-tot">{{ store.savedProducts?.items?.length }}</span>
+            <span class="bt-item-saved-tot">{{
+              store.savedProducts?.items?.length
+            }}</span>
           </NuxtLink>
-          <NuxtLink class="bottom-item" @click="store.registerOpen = !store.registerOpen" v-if="!store?.token">
+          <NuxtLink
+            class="bottom-item"
+            @click="store.registerOpen = !store.registerOpen"
+            v-if="!store?.token"
+          >
             <img
               src="@/assets/images/svg/8542029_heart_love_like_icon.svg"
               alt=""
@@ -660,11 +705,11 @@ const { locale, locales, t } = useI18n();
 
 const currentLang = computed(() => locale.value);
 
-const exitFunc = function() {
-  localStorage.clear()
-  window.location.reload(true)
-  window.location.href = '/'
-}
+const exitFunc = function () {
+  localStorage.clear();
+  window.location.reload(true);
+  window.location.href = "/";
+};
 
 const productQuantity = computed(() => {
   let quantity = 0;
@@ -674,7 +719,8 @@ const productQuantity = computed(() => {
   return quantity;
 });
 
-const categoryOpen = ref(false);
+const openCategory = ref(false);
+const categoryInst = ref(false)
 const openMenu = ref(-100 + "%");
 async function getSavedProduct() {
   const res = await services.getSavedProduct(store.token);
@@ -703,7 +749,7 @@ const headerCategorysInsaydes = ref({});
 
 async function headerCategorysIns() {
   const res = await services.headerCategorys();
-  headerCategorysInsaydes.value = res?.data
+  headerCategorysInsaydes.value = res?.data;
   console.log(res);
 }
 
@@ -716,16 +762,14 @@ async function searchProduct() {
 }
 
 const categoryTop = reactive({});
-const categoryClose = ref()
-
+const categoryClose = ref();
 
 const topCtaegoryItemTop = function (itemId) {
-  categoryTop[itemId] = !categoryTop[itemId];
-  console.log(itemId)
-  categoryClose.value = itemId
+  categoryTop[itemId] = true;
+  categoryClose.value = itemId;
 };
 
-const categorysProducts = ref({});
+const categorysProducts = ref();
 
 async function categorys() {
   store.loader = true;
@@ -734,7 +778,6 @@ async function categorys() {
   console.log(res);
   store.loader = false;
 }
-
 
 const callCenterInfo = ref({});
 
@@ -749,11 +792,11 @@ const pageCategoryInfo = ref({});
 const pageId = ref();
 
 const pageCtegory = async function () {
-  const res = await services.pageCategory();
+  const res = await services.pageCategory(locale.value);
   pageCategoryInfo.value = res?.data;
-  res?.data?.forEach((el)=> {
-    categoryTop[el.id] = false
-  })
+  res?.data?.forEach((el) => {
+    categoryTop[el.id] = false;
+  });
   console.log(res?.data);
 };
 
@@ -767,10 +810,13 @@ onMounted(() => {
   getSavedProduct();
 });
 
-watch(()=> locale.value, ()=> {
-  categorys();
-  getHeaderCategorys();
-})
+watch(
+  () => locale.value,
+  () => {
+    categorys();
+    getHeaderCategorys();
+  }
+);
 
 watch(
   () => locale.value,
@@ -805,7 +851,7 @@ watch(
     color: #fff;
     position: absolute;
     top: -13px;
-    right: 7px;
+    right: -5px;
   }
   .bt-item-saved-tot {
     width: 20px;
@@ -872,12 +918,13 @@ watch(
   right: 11px;
 }
 .categor-slug-wrap {
+  position: absolute;
+  top: 55px;
+  left: 500px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
-  margin-top: 20px;
-  margin-left: -10px;
 }
 .categor-name {
   font-weight: 400;

@@ -4,7 +4,7 @@
     <div class="chat">
       <div class="insaydes-settings" v-if="store.clearStorage">
         <img src="~/assets/images/png/clear.png" alt="">
-        <button @click="clearChat()">Очистить кеш</button>
+        <button @click="clearChat()">{{ t("clearCache") }}</button>
       </div>
       <div class="chat-header">
         <img width="50px" src="~/assets/images/png/bot.png" alt="Иконка бота" />

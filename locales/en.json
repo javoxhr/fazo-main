@@ -1,6 +1,7 @@
 {
     "name": "Hello",
-    "chatName": "Technical support",
+    "chatName": "Support",
+    "clearCache": "Clear cache",
     "chatTitle": "Bot sender",
     "botMessage": "Hello! Your message has been sent successfully. Our staff will contact you soon, leave your number if you haven’t already",
     "backButton": "Back",
@@ -44,5 +45,19 @@
     "SelectPaymentMethod": "Select payment method",
     "MethoDofObtaining": "Method of obtaining",
     "YourCity": "Your city",
-    "EnterYourDeliveryAddress": "Enter your delivery address"
+    "EnterYourDeliveryAddress": "Enter your delivery address",
+    "information": "Information",
+    "region": "Region",
+    "area": "Area",
+    "citiy": "Citiy",
+    "district": "District",
+    "home": "Home",
+    "exit": "Exit",
+    "personalInformation": "Personal information",
+    "editInfo": "Edit",
+    "myOrders": "My Orders",
+    "current": "Current",
+    "allOrders": "All",
+    "noOrders": "You have no orders yet",
+    "favoritesNot": "you don't have any products in your favorites yet"
 }

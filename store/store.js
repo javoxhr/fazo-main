@@ -28,6 +28,9 @@ export const useStore = defineStore("store", () => {
     const clearStorage = ref(false)
     const txtWrp = ref(false)
     const filterSwitch = ref(false)
+    const deliveryNotif = ref(false)
+    const loadingBtn = ref(false)
+    const purchease = ref(true)
     return {
         savedProducts,
         registerCode,
@@ -51,5 +54,8 @@ export const useStore = defineStore("store", () => {
         clearStorage,
         txtWrp,
         filterSwitch,
+        deliveryNotif,
+        loadingBtn,
+        purchease
     }
 })

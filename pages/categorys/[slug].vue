@@ -79,6 +79,7 @@
             @click="brandTog = !brandTog"
           >
             <h1>{{ t("brand") }}</h1>
+            
             <button
               class="brand-btn"
               :class="{ 'arrow-filter-item-active': brandTog }"

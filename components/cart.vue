@@ -29,8 +29,8 @@
                 <span>{{ t("total") }} {{ store.cart.length }} {{ t("prod") }}</span>
                 <h2>{{ totalProduct }} Сум</h2>
               </div>
-              <NuxtLink to="/order" @click="store.showCart = false">
-                <button>Покупка</button>
+              <NuxtLink :to="localePath('/order')" @click="store.showCart = false">
+                <button>{{ t("purchase") }}</button>
               </NuxtLink>
             </div>
           </div>
@@ -42,6 +42,7 @@
 
 <script setup>
 import { useStore } from "~/store/store";
+const localePath = useLocalePath();
 const {locale, t} = useI18n()
 
 const store = useStore();

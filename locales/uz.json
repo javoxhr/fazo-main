@@ -1,6 +1,7 @@
 {
     "name": "Salom",
     "chatName": "Qo'lab quvatlash",
+    "clearCache": "Chatni tozalash",
     "chatTitle": "Bot jo'natuvchi",
     "botMessage": "Salom! Xabaringiz muvaffaqiyatli yuborildi. Xodimlarimiz tez orada siz bilan bog'lanadi, agar raqamingizni qoldirmagan bo'lsangiz raqamingizni qoldiring.",
     "backButton": "Ortga",
@@ -44,5 +45,19 @@
     "SelectPaymentMethod": "To'lov usulini tanlang",
     "MethoDofObtaining": "Qabul qilish usuli",
     "YourCity": "Sizning shahringiz",
-    "EnterYourDeliveryAddress": "Yetkazib berish manzilingizni kiriting"
+    "EnterYourDeliveryAddress": "Yetkazib berish manzilingizni kiriting",
+    "information": "Ma'lumot",
+    "region": "Viloyat",
+    "area": "Hudud",
+    "citiy": "Shahar",
+    "district": "Tuman",
+    "home": "Asosiy saxifaga",
+    "exit": "Chiqish",
+    "personalInformation": "Shahsiy ma'lumotlar",
+    "editInfo": "O'zgartirish",
+    "myOrders": "Mening Buyurtmalarim",
+    "current": "Hozirgi",
+    "allOrders": "Hammasi",
+    "noOrders": "Sizda hali buyurtmalar yo'q",
+    "favoritesNot": "Sizning istaglaringizda hali hech qanday mahsulot yo'q"
 }

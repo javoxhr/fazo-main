@@ -8,11 +8,11 @@
           <nav>
             <ul>
               <li>
-                <NuxtLink to="/">Главная</NuxtLink
+                <NuxtLink to="/">{{ t("home") }}</NuxtLink
                 ><img src="./images/chevron-right.svg" alt="" />
               </li>
             </ul>
-            <button class="manneger" @click="store.servic = true">Техподдержка</button>
+            <button class="manneger" @click="store.servic = true">{{ t("chatName") }}</button>
           </nav>
           <div class="cabinet__header__grid-card">
             <button><img src="./images/grid.svg" alt="" /></button>
@@ -24,7 +24,7 @@
           <div class="cabinet__wrapper__left">
             <button to="/" class="exit" @click="clearItem()">
               <span><img src="@/assets/images/svg/exit.svg" alt="" /></span>
-              <button>Выйти</button>
+              <button>{{ t("exit") }}</button>
             </button>
             <span class="cabinet-left-linie"></span>
           </div>
@@ -36,9 +36,9 @@
                   <span class="prof-img"
                     ><img src="@/assets/images/svg/man.svg" alt=""
                   /></span>
-                  <span>Личные данные</span>
+                  <span>{{ t("personalInformation") }}</span>
                 </div>
-                <button @click="store.update = !store.update">Изменит</button>
+                <button @click="store.update = !store.update">{{ t("editInfo") }}</button>
               </div>
               <span class="cabinet-right-linia"></span>
               <div class="user-info">
@@ -55,18 +55,19 @@
                   <span
                     ><img src="@/assets/images/svg/file-text.svg" alt=""
                   /></span>
-                  <h3>Мои Заказы</h3>
+                  <h3>{{ t("myOrders") }}</h3>
                 </div>
                 <div class="history-information__header__btns">
-                  <button>Текущий</button>
-                  <button>Все</button>
+                  <button>{{ t("current") }}</button>
+                  <button>{{ t("allOrders") }}</button>
                 </div>
               </div>
 
               <span class="linia-history"></span>
 
               <div class="history-information__cards-wrapper">
-                <h1 class="none-history">У вас заказы нет пока что</h1>
+                <h1 class="none-history">{{ t("noOrders") }}</h1>
+                <orderItems v-for="item in currentProduct" :key="item" :orderItem="item"/>
               </div>
             </div>
           </div>
@@ -85,15 +86,28 @@
 </template>
 
 <script setup>
+import services from "~/services/services";
 import { useStore } from "~/store/store";
 
 const store = useStore();
+
+const {locale, locales, t} = useI18n()
 
 function clearItem() {
   localStorage.clear();
   window.location.reload(true);
   window.location.href = "/";
 }
+
+const currentProduct = ref({})
+
+async function currentProducts() {
+  const res = await services.currentProducts(store.token)
+  currentProduct.value = res.data
+  console.log(res.data)
+}
+
+currentProducts()
 </script>
 
 <style lang="scss" scoped>
@@ -101,6 +115,7 @@ function clearItem() {
   font-weight: 500;
   font-size: 20px;
   color: #6a6969;
+  display: none;
 }
 .exit {
   border: none;

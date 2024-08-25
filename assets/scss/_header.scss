@@ -267,6 +267,18 @@
         background: #fff;
         border-top: 1px solid #F2F2F2;
         padding: 35px 0 80px;
+        @media screen and (max-width: 1170px) {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 500px;
+            height: 100%;
+            z-index: 22;
+            padding: 10px 0;
+        }
+        @media screen and (max-width: 650px) {
+            width: 100%;
+        }
         &__banner {
             a {
                 img {
@@ -279,6 +291,7 @@
             display: flex;
             align-items: flex-start;
             gap: 30px;
+            width: 100%;
         }
         .container {
             display: flex;
@@ -286,9 +299,13 @@
             gap: 100px;
         }
         &__left {
+            width: 100%;
             display: flex;
             flex-direction: column;
             gap: 20px;
+            @media screen and (max-width: 1170px) {
+                gap: 40px;
+            }
             &__item {
                 width: 400px;
                 padding: 8px 20px;
@@ -297,8 +314,20 @@
                 align-items: center;
                 justify-content: space-between;
                 cursor: pointer;
+                position: relative;
                 @media screen and (max-width: 400px) {
                     width: 325px;
+                }
+                @media screen and (max-width: 1170px) {
+                    width: 100%;
+                    &::after {
+                        content: '';
+                        width: 92%;
+                        border: 1px solid #dddada;
+                        background: #000;
+                        position: absolute;
+                        top: 60px;
+                    }
                 }
                 &:hover {
                     background: #F2F2F2;
@@ -330,7 +359,6 @@
                 width: 270px;
                 font-weight: 600;
                 font-size: 24px;
-                margin-left: -11px;
             }
         }
         .cet-items-wrapper {
@@ -339,6 +367,23 @@
             align-items: flex-start;
             gap: 10px;
         }
+    }
+}
+
+.open-category-header {
+    display: none;
+    @media screen and (max-width: 1170px) {
+        display: block;
+    }
+    padding-bottom: 10px;
+    h2 {
+        font-weight: 400;
+        font-size: 18px;
+    }
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
     }
 }
 
@@ -632,6 +677,9 @@
 
 @media screen and (max-width: 1170px) {
     .header-category {
+        &__list {
+            display: none;
+        }
         .container {
             gap: 10px;
             margin-top: 20px;

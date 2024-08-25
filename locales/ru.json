@@ -1,6 +1,7 @@
 {
     "name": "Privet",
     "chatName": "Техподдержка",
+    "clearCache": "Очистить кеш",
     "chatTitle": "Бот отправиитель",
     "botMessage": "Здравствуйте! Ваше сообщение отправлено успешно. Скоро с вами свяжутся наши сотрудники, оставьте свой номер если вы еще не оставили.",
     "backButton": "Назад",
@@ -44,5 +45,19 @@
     "SelectPaymentMethod": "Выберите способ оплаты",
     "MethoDofObtaining": "Способ получения",
     "YourCity": "Ваш город",
-    "EnterYourDeliveryAddress": "Укажите адрес доставки"
+    "EnterYourDeliveryAddress": "Укажите адрес доставки",
+    "information": "Информация",
+    "region": "Регион",
+    "area": "Область",
+    "citiy": "Город",
+    "district": "Район",
+    "home": "Главная",
+    "exit": "Выйти",
+    "personalInformation": "Личные данные",
+    "editInfo": "Изменить",
+    "myOrders": "Мои Заказы",
+    "current": "Текущий",
+    "allOrders": "Все",
+    "noOrders": "У вас еще нет заказов",
+    "favoritesNot": "У вас пока нет товаров в избранном"
 }

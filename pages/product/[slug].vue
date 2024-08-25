@@ -99,12 +99,15 @@
             </div>
           </div>
           <span class="product-quantitiy"
-            >{{ t("Instock") }}: <span>{{ detail?.product?.residue_store }}</span
+            >{{ t("Instock") }}:
+            <span>{{ detail?.product?.residue_store }}</span
             ><span>{{ t("pieces") }}</span></span
           >
-          <div class="detail__text-wrapper__buy-btn">
-            <button>{{ t("BuyNow") }}</button>
-          </div>
+          <NuxtLink :to="localePath('/order')">
+            <div class="detail__text-wrapper__buy-btn">
+              <button @click="addToCart(item)">{{ t("BuyNow") }}</button>
+            </div>
+          </NuxtLink>
           <div class="detail__text-wrapper__info">
             <span>{{ t("GeneralInformation") }}</span>
             <p>
@@ -130,7 +133,9 @@
 
         <div class="detail__info-cards">
           <div class="detail__info-cards__card">
-            <h1><img src="./images/suporte.svg" alt="" />{{ t("AnyQuestions") }}</h1>
+            <h1>
+              <img src="./images/suporte.svg" alt="" />{{ t("AnyQuestions") }}
+            </h1>
             <div class="detail__items-wrap">
               <div class="detail__items-wrap__item">
                 <span>{{ t("phone") }}:</span>
@@ -138,7 +143,7 @@
               </div>
 
               <div class="detail__items-wrap__item">
-                <span>{{t("telegram")}}:</span>
+                <span>{{ t("telegram") }}:</span>
                 <a href="#">@mixel_uz</a>
               </div>
 
@@ -179,6 +184,7 @@ import { useStore } from "~/store/store";
 import services from "~/services/services";
 const store = useStore();
 const route = useRoute();
+const localePath = useLocalePath();
 const { locale, locales, t } = useI18n();
 
 const index = ref(0);
@@ -210,17 +216,21 @@ async function getSavedProduct() {
 }
 
 const createSaved = async () => {
-  const res = await services.createSaved(store?.token, detail?.product?.slug, locale.value);
-  getSavedProduct()
+  const res = await services.createSaved(
+    store?.token,
+    detail?.product?.slug,
+    locale.value
+  );
+  getSavedProduct();
 };
 
 const checkSaved = computed(() => {
-    const item = store.cart?.find((el) => el?.id == detail?.product?.id);
-    if (item) {
-      return true;
-    } else {
-      return false;
-    }
+  const item = store.cart?.find((el) => el?.id == detail?.product?.id);
+  if (item) {
+    return true;
+  } else {
+    return false;
+  }
 });
 </script>
 

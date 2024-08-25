@@ -180,6 +180,13 @@ export default {
 
         })
     },
+    getSubCategorysProducts(params, lang) {
+        return $fetch(`${baseUrl.value}product-manager/category-product/sub-category?${params}`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
+    },
     regions() {
         return $fetch(`${baseUrl.value}order-manager/region/index`)
     },
@@ -189,14 +196,29 @@ export default {
     paymentTypes() {
         return $fetch(`${baseUrl.value}order-manager/store/payment-types`)
     },
-    pageCategory() {
-        return $fetch(`${baseUrl.value}page-info/category`)
+    pageCategory(lang) {
+        return $fetch(`${baseUrl.value}page-info/category`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
     },
-    pageCategoryDetail(id) {
-        return $fetch(`${baseUrl.value}page-info/category-detail?category_id=${id}`)
+    pageCategoryDetail(id, lang) {
+        return $fetch(`${baseUrl.value}page-info/category-detail?category_id=${id}`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
     },
     callCenter(lang) {
         return $fetch(`${baseUrl.value}contact-us/about`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
+    },
+    TopCategory(lang, params) {
+        return $fetch(`${baseUrl.value}product-manager/category-product/sub-category?${params}`, {
             headers: {
                 "Accept-Language": lang
             }
@@ -206,10 +228,24 @@ export default {
         return $fetch(`${baseUrl.value}order-manager/order/delivery`, {
             method: "POST",
             headers: {
-                "Authorization": token,
+                "Authorization": `Bearer ${token}`,
                 "Accept-Language": lang,
             },
-            body: body
+            body: body,
+        })
+    },
+    deliveryToHome(token) {
+        return $fetch(`${baseUrl.value}order-manager/store/index`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+    },
+    currentProducts(token) {
+        return $fetch(`${baseUrl.value}order-manager/my-order/currently`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
         })
     }
 }

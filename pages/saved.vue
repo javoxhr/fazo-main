@@ -11,7 +11,7 @@
         />
       </div>
       <div class="not-product-in-saved" v-if="!store.savedProducts?.items?.length">
-        <h1>don't have product in saved! 😓</h1>
+        <h1>{{ t("favoritesNot") }} 😓</h1>
       </div>
     </div>
   </div>
@@ -58,6 +58,7 @@ getSavedProduct();
     font-size: 25px;
     @media screen and (max-width: 500px) {
       font-size: 16px;
+      text-align: center;
     }
   }
 }
