@@ -83,8 +83,8 @@ export default {
             }
         })
     },
-    headerCategorys(s) {
-        return $fetch(`${baseUrl.value}category-manager/category/index?searchKey=${s}`)
+    headerCategorys() {
+        return $fetch(`${baseUrl.value}category-manager/category/index`)
     },
     getProductCategory(lang) {
         return $fetch(`${baseUrl.value}product-manager/our-offers/index?parentCategoryKey=smartfon-va-gadjetlar`, {

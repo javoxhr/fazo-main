@@ -924,7 +924,11 @@ watch(
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
+  gap: 30px;
+  @media screen and (max-width: 1170px) {
+    top: 480px;
+    left: 40px;
+  }
 }
 .categor-name {
   font-weight: 400;

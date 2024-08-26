@@ -151,7 +151,7 @@
                       @click="regionShow = !regionShow"
                     >
                       <span>{{ t("region") }} / {{ t("area") }}*</span>
-                      <img src="./images/order-arrow.svg" alt="" />
+                      <img src="~/assets/images/svg/order-arrow.svg" alt="" />
                       <button class="region-name">{{ nameRigion }}</button>
                     </div>
                     <ul class="regions-wrap" v-if="regionShow">
@@ -174,7 +174,7 @@
                       @click="regionDistShow = !regionDistShow"
                     >
                       <span>{{ t("citiy") }} / {{ t("district") }}*</span>
-                      <img src="./images/order-arrow.svg" alt="" />
+                      <img src="~/asstest/images/svg/order-arrow.svg" alt="" />
                       <button class="region-name">{{ regionDistName }}</button>
                     </div>
                     <ul class="region-dist-wrap" v-if="regionDistShow">
@@ -208,7 +208,7 @@
                   </div>
                 </div>
                 <div class="delivery-home">
-                  <input type="checkbox" @change="checkBox = !checkBox" />
+                  <input type="checkbox" @change="checkBox = !checkBox, getPriceToHome = res?.data?.home_delivery_price " />
                   <span>Uygacha yetkazib berish</span>
                 </div>
 
@@ -252,7 +252,7 @@
 
               <h2 v-else>{{ t("priceDelivery") }}</h2>
             </div>
-            <div class="delivery-price-to-home">
+            <div class="delivery-price-to-home" v-if="checkBox">
               <h3>Uygacha yetkazib berish</h3>
               <span>{{ deliveryToHomePrice?.homeDeliveryPriceFormat }}</span>
             </div>
@@ -317,13 +317,23 @@ onUnmounted(() => {
 
 const { locale, locales, t } = useI18n();
 
+const deliveryToHomePrice = ref({})
+
+const getPriceToHome = ref(Number(0))
+
+async function PriceDeliveryToHome() {
+  const res = await services.priceDeliveryToHome()
+  deliveryToHomePrice.value = res.data
+  console.log(res)
+}
+
 const regionShow = ref(false);
 const regionDistShow = ref(false);
 
 const allPriceOrder = computed(() => {
   let price = 0;
   store.cart.forEach((el) => {
-    price += el.price * el.quantity;
+    price += el.price * el.quantity
   });
   return price;
 });
@@ -421,14 +431,6 @@ const deliveryToHome = async function () {
   deliverToHome.value = res;
   console.log(res);
 };
-
-const deliveryToHomePrice = ref({})
-
-async function PriceDeliveryToHome() {
-  const res = await services.priceDeliveryToHome()
-  deliveryToHomePrice.value = res.data
-  console.log(res)
-}
 
 PriceDeliveryToHome()
 onMounted(() => {
