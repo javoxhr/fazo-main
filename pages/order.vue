@@ -39,7 +39,7 @@
                     <span class="circle"></span>
                     <h2>Оплата через Payme</h2>
                   </div>
-                  <img src="~/assets/images/svg/pay-me.svg" alt="" />
+                  <img src="@/assets/images/svg/pay-me.svg" alt="" />
                 </label>
               </div>
               <div class="card-radio">
@@ -54,7 +54,7 @@
                     <span class="circle"></span>
                     <h2>Онлайн оплата по карте UZCARD и HUMO</h2>
                   </div>
-                  <img src="~/assets/images/svg/wal.svg" alt="" />
+                  <img src="@/assets/images/svg/wal.svg" alt="" />
                 </label>
               </div>
               <div class="card-radio">
@@ -69,7 +69,7 @@
                     <span class="circle"></span>
                     <h2>Оплата через Payme</h2>
                   </div>
-                  <img src="~/assets/images/svg/cash.svg" alt="" />
+                  <img src="@/assets/images/svg/cash.svg" alt="" />
                 </label>
               </div>
               <div class="card-radio">
@@ -84,7 +84,7 @@
                     <span class="circle"></span>
                     <h2>Наличными при получении</h2>
                   </div>
-                  <img src="~/assets/images/svg/terminal.svg" alt="" />
+                  <img src="@/assets/images/svg/terminal.svg" alt="" />
                 </label>
               </div>
               <div class="card-radio">
@@ -99,7 +99,7 @@
                     <span class="circle"></span>
                     <h2>Наличными при получении</h2>
                   </div>
-                  <img src="~/assets/images/svg/clock.svg" alt="" />
+                  <img src="@/assets/images/svg/clock.svg" alt="" />
                 </label>
               </div>
             </div>
@@ -152,7 +152,7 @@
                       @click="regionShow = !regionShow"
                     >
                       <span>{{ t("region") }} / {{ t("area") }}*</span>
-                      <img src="~/assets/images/svg/order-arrow.svg" alt="" />
+                      <img src="@/assets/images/svg/order-arrow.svg" alt="" />
                       <button class="region-name">{{ nameRigion }}</button>
                     </div>
                     <ul class="regions-wrap" v-if="regionShow">
@@ -175,7 +175,7 @@
                       @click="regionDistShow = !regionDistShow"
                     >
                       <span>{{ t("citiy") }} / {{ t("district") }}*</span>
-                      <img src="~/assets/images/svg/order-arrow.svg" alt="" />
+                      <img src="@/assets/images/svg/order-arrow.svg" alt="" />
                       <button class="region-name">{{ regionDistName }}</button>
                     </div>
                     <ul class="region-dist-wrap" v-if="regionDistShow">

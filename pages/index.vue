@@ -153,10 +153,10 @@
           <h1>{{ t("Brands") }}</h1>
           <div class="breand-btns-wrap">
             <button>
-              <img src="~/assets/images/png/breand-left-arrow.png" alt="" />
+              <img src="@/assets/images/png/breand-left-arrow.png" alt="" />
             </button>
             <button>
-              <img src="~/assets/images/png/breand-right-arrow.png" alt="" />
+              <img src="@/assets/images/png/breand-right-arrow.png" alt="" />
             </button>
           </div>
         </div>

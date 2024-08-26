@@ -24,7 +24,6 @@
 
           <div class="lang-and-contact">
             <div class="header-top__contact">
-              <img src="@/assets/images/contact.svg" alt="" />
               <span>+998 95 123 55 88</span>
             </div>
 
@@ -34,7 +33,7 @@
                 <img
                   class="lang-strel"
                   :class="{ 'lang-strel-active': langShow == true }"
-                  src="@/assets/images/svg/Arrow-header (2).svg"
+                  src="~/assets/images/svg/Arrow-header (2).svg"
                   alt=""
                 />
               </div>
@@ -56,14 +55,14 @@
       <div class="menu-header">
         <div class="container">
           <NuxtLink to="/" class="menu-header__logo"
-            ><img src="@/assets/images/svg/loco.svg" alt="" />
+            ><img src="~/assets/images/svg/loco.svg" alt="" />
           </NuxtLink>
           <div class="menu-header__contact">
             <button>
-              <img src="@/assets/images/png/tel-phone.png" alt="" />
+              <img src="~/assets/images/png/tel-phone.png" alt="" />
             </button>
             <button>
-              <img src="@/assets/images/png/gay-map.png" alt="" />Ташкент
+              <img src="~/assets/images/png/gay-map.png" alt="" />Ташкент
             </button>
           </div>
         </div>
@@ -97,12 +96,12 @@
         <div class="container">
           <div class="logo">
             <NuxtLink :to="localePath('/')" @click="store.txtWrp = false"
-              ><img src="@/assets/images/svg/loco.svg" alt=""
+              ><img src="~/assets/images/svg/loco.svg" alt=""
             /></NuxtLink>
           </div>
 
           <button class="header-bottom__menu-btn" @click="openMenu = 0">
-            <img src="@/assets/images/svg/Menu (2).svg" alt="" />
+            <img src="~/assets/images/svg/Menu (2).svg" alt="" />
           </button>
 
           <div class="header-bottom__search">
@@ -110,7 +109,7 @@
               <div class="header-bottom__search__category">
                 <button>
                   Все категории
-                  <img src="@/assets/images/svg/gray-arrow.svg" alt="" />
+                  <img src="~/assets/images/svg/gray-arrow.svg" alt="" />
                 </button>
                 <span>|</span>
               </div>
@@ -124,7 +123,7 @@
                     :placeholder="t('mainInputPlaceHolder')"
                   />
                   <button type="submit">
-                    <img src="@/assets/images/mic.svg" alt="" />
+                    <img src="~/assets/images/svg/mic.svg" alt="" />
                   </button>
                 </form>
               </div>
@@ -132,7 +131,7 @@
 
             <div class="header-bottom__search__btn">
               <button>
-                <img src="@/assets/images/svg/search.svg" alt="" />
+                <img src="~/assets/images/svg/search.svg" alt="" />
                 <h4 class="search-btn-text">{{ t("buttonHeader") }}</h4>
               </button>
             </div>
@@ -148,7 +147,7 @@
                   : (store.registerOpen = !store.registerOpen)
               "
             >
-              <img src="@/assets/images/svg/man.svg" alt="" />
+              <img src="~/assets/images/svg/man.svg" alt="" />
               <span>{{ store?.userInfo?.firstname }} </span>
             </NuxtLink>
 
@@ -156,7 +155,7 @@
               v-if="!store.token"
               class="header-bottom__items__item"
             >
-              <img src="@/assets/images/svg/man.svg" alt="" />
+              <img src="~/assets/images/svg/man.svg" alt="" />
               <span>Login</span>
             </button>
             
@@ -170,7 +169,7 @@
                 v-if="store.savedProducts?.items?.length"
                 >{{ store.savedProducts?.items?.length }}</span
               >
-              <img src="@/assets/images/svg/like.svg" alt="" />
+              <img src="~/assets/images/svg/like.svg" alt="" />
               <span>{{ t("Saved") }}</span>
             </NuxtLink>
 
@@ -185,7 +184,7 @@
                 v-if="store.savedProducts?.items?.length"
                 >{{ store.savedProducts?.items?.length }}</span
               >
-              <img src="@/assets/images/svg/like.svg" alt="" />
+              <img src="~/assets/images/svg/like.svg" alt="" />
               <span>{{ t("Saved") }}</span>
             </button>
 
@@ -193,7 +192,7 @@
               class="header-bottom__items__item"
               @click="store.showCart = !store.showCart"
             >
-              <img src="@/assets/images/svg/shopping-cart.svg" alt="" />
+              <img src="~/assets/images/svg/shopping-cart.svg" alt="" />
               <span class="product-count" v-if="store.cart.length">{{
                 productQuantity
               }}</span>
@@ -211,7 +210,7 @@
               categoryInst = false, openCategory= !openCategory
               "
             >
-              <img src="@/assets/images/svg/category-btn.svg" alt="" />{{
+              <img src="~/assets/images/svg/category-btn.svg" alt="" />{{
                 t("buttonCategory")
               }}
             </button>
@@ -252,7 +251,7 @@
                     <img width="45px" :src="item?.iconUrl" alt="" />
                     {{ item?.name }}
                   </button>
-                  <img src="@/assets/images/png/category-arrow.png" alt="" />
+                  <img src="~/assets/images/png/category-arrow.png" alt="" />
                 </div>
               </div>
 
@@ -293,10 +292,10 @@
 
       <div class="menu" :style="{ left: openMenu }">
         <div class="menu__header">
-          <a href="#"><img src="@/assets/images/svg/logo-menu.svg" alt="" /></a>
+          <a href="#"><img src="~/assets/images/svg/logo-menu.svg" alt="" /></a>
           <button>
             <img
-              src="@/assets/images/svg/x.svg"
+              src="~/assets/images/svg/x.svg"
               alt=""
               id="menu-close"
               @click="openMenu = -100 + '%'"
@@ -306,10 +305,10 @@
 
         <div class="menu__register">
           <button v-if="!store.token" @click="store.registerOpen = true">
-            <span><img src="@/assets/images/svg/man.svg" alt="" /></span>Войти
+            <span><img src="~/assets/images/svg/man.svg" alt="" /></span>Войти
           </button>
           <button v-if="store.token">
-            <span><img src="@/assets/images/svg/man.svg" alt="" /></span
+            <span><img src="~/assets/images/svg/man.svg" alt="" /></span
             ><NuxtLink style="color: #000" to="/cabinet">{{
               store?.userInfo?.firstname
             }}</NuxtLink>
@@ -337,7 +336,7 @@
       <div class="menu-bottom">
         <div class="container">
           <NuxtLink :to="localePath('/')" class="bottom-item">
-            <img src="@/assets/images/svg/bottom-menu-home.svg" alt="" />
+            <img src="~/assets/images/svg/bottom-menu-home.svg" alt="" />
             <span>home</span>
           </NuxtLink>
 
@@ -345,13 +344,13 @@
             class="bottom-item"
             @click="store.showCart = !store.showCart"
           >
-            <img src="@/assets/images/svg/menu-bottom-cart.svg" alt="" />
+            <img src="~/assets/images/svg/menu-bottom-cart.svg" alt="" />
             <span class="bt-item-saved-tot-cart">{{ productQuantity }}</span>
             <span>{{ t("Cart") }}</span>
           </NuxtLink>
 
           <NuxtLink class="bottom-item" @click="openCategory = !openCategory">
-            <img src="@/assets/images/svg/menu-menu.svg" alt="" />
+            <img src="~/assets/images/svg/menu-menu.svg" alt="" />
             <span>categories</span>
           </NuxtLink>
 
@@ -360,7 +359,7 @@
             class="bottom-item"
             v-if="store.token"
           >
-            <img src="@/assets/images/svg/user.svg" alt="" />
+            <img src="~/assets/images/svg/user.svg" alt="" />
             <span>{{ store?.userInfo?.firstname }}</span>
           </NuxtLink>
 
@@ -369,7 +368,7 @@
             @click="store.registerOpen = !store.registerOpen"
             v-if="!store.token"
           >
-            <img src="@/assets/images/svg/user.svg" alt="" />
+            <img src="~/assets/images/svg/user.svg" alt="" />
             <span>{{ t("Login") }}</span> 
           </NuxtLink>
   
@@ -379,7 +378,7 @@
             v-if="store.token"
           >
             <img
-              src="@/assets/images/svg/8542029_heart_love_like_icon.svg"
+              src="~/assets/images/svg/8542029_heart_love_like_icon.svg"
               alt=""
             />
             <span>saved</span>
@@ -393,7 +392,7 @@
             v-if="!store?.token"
           >
             <img
-              src="@/assets/images/svg/8542029_heart_love_like_icon.svg"
+              src="~/assets/images/svg/8542029_heart_love_like_icon.svg"
               alt=""
             />
             <span>saved</span>
@@ -408,13 +407,13 @@
     <CodeRegister :length="4" />
     <resetVerifyCode :lengthRes="4" />
     <NuxtPage />
-    <cart />
+    <cart/>
     <div class="footer">
       <div class="container">
         <div class="footer__left">
           <div class="footer__logo">
             <a href="./index.html"
-              ><img src="@/assets/images/svg/footer-logo.svg" alt=""
+              ><img src="~/assets/images/svg/footer-logo.svg" alt=""
             /></a>
           </div>
           <div class="col-center">

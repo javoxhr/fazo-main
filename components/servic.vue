@@ -3,11 +3,11 @@
     <div class="overlay" @click="store.servic = false"></div>
     <div class="chat">
       <div class="insaydes-settings" v-if="store.clearStorage">
-        <img src="~/assets/images/png/clear.png" alt="">
+        <img src="@/assets/images/png/clear.png" alt="">
         <button @click="clearChat()">{{ t("clearCache") }}</button>
       </div>
       <div class="chat-header">
-        <img width="50px" src="~/assets/images/png/bot.png" alt="Иконка бота" />
+        <img width="50px" src="@/assets/images/png/bot.png" alt="Иконка бота" />
         <div class="chat-header__text-wrapper">
           <h3>{{ t("chatName") }}</h3>
           <span>{{ t("chatTitle") }}</span>
@@ -20,13 +20,13 @@
       <div class="chat-footer">
         <form id="form-chat">
           <button class="settings-chat" type="button" @click="store.clearStorage = !store.clearStorage">
-            <img src="~/assets/images/png/settings-chat.png" alt="" />
+            <img src="@/assets/images/png/settings-chat.png" alt="" />
           </button>
           <input type="text" id="input-message" :placeholder="t('chatInput')" />
           <button type="submit">
             <img
               width="20px"
-              src="~/assets/images/png/send-icon-2.png"
+              src="@/assets/images/png/send-icon-2.png"
               alt="Иконка отправки"
             />
           </button>
