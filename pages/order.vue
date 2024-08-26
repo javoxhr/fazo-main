@@ -174,7 +174,7 @@
                       @click="regionDistShow = !regionDistShow"
                     >
                       <span>{{ t("citiy") }} / {{ t("district") }}*</span>
-                      <img src="~/asstest/images/svg/order-arrow.svg" alt="" />
+                      <img src="~/assets/images/svg/order-arrow.svg" alt="" />
                       <button class="region-name">{{ regionDistName }}</button>
                     </div>
                     <ul class="region-dist-wrap" v-if="regionDistShow">
