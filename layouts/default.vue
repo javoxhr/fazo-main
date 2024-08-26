@@ -319,16 +319,15 @@
           <button @click="store.enterPhone = true" v-if="!store.token">
             Регистрация
           </button>
-          <button @click="exitFunc()" v-if="store.token">Выйти</button>
+          <button @click="exitFunc()" v-if="store.token">{{ t("exit") }}</button>
         </div>
 
         <div class="menu__info">
-          <a href="#">Доставка</a>
-          <a href="#">обработка заказов</a>
+          <NuxtLink @click="openMenu = -100 + '%'" v-for="item in pageCategoryInfo" :key="item" :to="`/delivery/${item?.id}`">{{ item?.name }}</NuxtLink>
         </div>
 
         <div class="menu__lang">
-          <NuxtLink v-for="{code, name} in locales" :key="code" :to="swithcLocalePath(code)">
+          <NuxtLink @click="openMenu = -100 + '%'" v-for="{code, name} in locales" :key="code" :to="swithcLocalePath(code)">
              <button>{{ name }}</button>
           </NuxtLink>
 
@@ -775,7 +774,7 @@ async function categorys() {
   store.loader = true;
   const res = await services.categorys(searchVal.value, locale.value);
   categorysProducts.value = res.data;
-  console.log(res);
+  console.log(res.data);
   store.loader = false;
 }
 
@@ -794,6 +793,7 @@ const pageId = ref();
 const pageCtegory = async function () {
   const res = await services.pageCategory(locale.value);
   pageCategoryInfo.value = res?.data;
+  console.log(res.data)
   res?.data?.forEach((el) => {
     categoryTop[el.id] = false;
   });

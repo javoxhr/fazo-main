@@ -27,7 +27,7 @@
             </div>
             <div class="credit-card__cards-wrap">
               <div class="card-radio">
-                <input
+                <input checked
                   @change="radioChange = pymentType[1]?.id"
                   name="price"
                   id="radio1"
@@ -114,6 +114,7 @@
                 <div class="dlv-wrp">
                   <div class="dlv-lb-wrp">
                     <input
+                    checked
                       id="check1"
                       name="d-radio"
                       type="radio"
@@ -251,6 +252,10 @@
 
               <h2 v-else>{{ t("priceDelivery") }}</h2>
             </div>
+            <div class="delivery-price-to-home">
+              <h3>Uygacha yetkazib berish</h3>
+              <span>{{ deliveryToHomePrice?.homeDeliveryPriceFormat }}</span>
+            </div>
             <span class="order-total-linie"></span>
             <div class="all-paymet">
               <span>{{ t("TotalPayable") }}</span>
@@ -285,7 +290,7 @@ const radioChange = ref();
 const checkBox = ref(false);
 
 const delivToHome = ref(false);
-const deliveryRegion = ref(false);
+const deliveryRegion = ref(true);
 
 const handleScroll = () => {
   const totalBox = document.querySelector("#total-box");
@@ -417,6 +422,15 @@ const deliveryToHome = async function () {
   console.log(res);
 };
 
+const deliveryToHomePrice = ref({})
+
+async function PriceDeliveryToHome() {
+  const res = await services.priceDeliveryToHome()
+  deliveryToHomePrice.value = res.data
+  console.log(res)
+}
+
+PriceDeliveryToHome()
 onMounted(() => {
   deliveryToHome();
   paymentTypes();
@@ -434,6 +448,20 @@ watch(
 
 
 <style lang="scss" scoped>
+.delivery-price-to-home {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 0 10px;
+  h3 {
+    font-weight: 400;
+    font-size: 16px;
+  }
+  span {
+    font-weight: 600;
+    font-size: 18px;
+  }
+}
 .dlv-wrp {
   display: flex;
   align-items: center;

@@ -247,5 +247,8 @@ export default {
                 "Authorization": `Bearer ${token}`
             }
         })
+    },
+    priceDeliveryToHome() {
+        return $fetch(`${baseUrl.value}order-manager/store/home-delivery-sum`)
     }
 }
