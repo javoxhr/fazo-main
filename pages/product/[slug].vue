@@ -134,7 +134,7 @@
         <div class="detail__info-cards">
           <div class="detail__info-cards__card">
             <h1>
-              <img src="./images/suporte.svg" alt="" />{{ t("AnyQuestions") }}
+              <img src="@/assets/images/suporte.svg" alt="" />{{ t("AnyQuestions") }}
             </h1>
             <div class="detail__items-wrap">
               <div class="detail__items-wrap__item">
@@ -156,12 +156,12 @@
 
           <div class="detail__deliver-card">
             <h1 class="detail__deliver-card__title">
-              <img src="./images/delivery.svg" alt="" />{{ t("delivery") }}:
+              <img src="@/assets/images/delivery.svg" alt="" />{{ t("delivery") }}:
               <span>{{ t("priceDelivery") }}</span>
             </h1>
 
             <h1 class="detail__deliver-card__info-deliver">
-              <img src="./images/wallet.svg" alt="" />{{ t("PaymentMethod") }}:
+              <img src="@/assets/images/wallet.svg" alt="" />{{ t("PaymentMethod") }}:
             </h1>
 
             <div class="detail__deliver-card__items-wrap">

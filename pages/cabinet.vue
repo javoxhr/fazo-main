@@ -15,8 +15,8 @@
             <button class="manneger" @click="store.servic = true">{{ t("chatName") }}</button>
           </nav>
           <!-- <div class="cabinet__header__grid-card">
-            <button><img src="./images/grid.svg" alt="" /></button>
-            <button><img src="./images/grid-menu.svg" alt="" /></button>
+            <button><img src="@/assets/images/grid.svg" alt="" /></button>
+            <button><img src="@/assets/images/grid-menu.svg" alt="" /></button>
           </div> -->
         </div>
 

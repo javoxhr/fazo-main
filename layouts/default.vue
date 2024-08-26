@@ -24,7 +24,7 @@
 
           <div class="lang-and-contact">
             <div class="header-top__contact">
-              <img src="./images/contact.svg" alt="" />
+              <img src="@/assets/images/contact.svg" alt="" />
               <span>+998 95 123 55 88</span>
             </div>
 
@@ -124,7 +124,7 @@
                     :placeholder="t('mainInputPlaceHolder')"
                   />
                   <button type="submit">
-                    <img src="./images/mic.svg" alt="" />
+                    <img src="@/assets/images/mic.svg" alt="" />
                   </button>
                 </form>
               </div>

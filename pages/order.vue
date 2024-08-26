@@ -27,7 +27,8 @@
             </div>
             <div class="credit-card__cards-wrap">
               <div class="card-radio">
-                <input checked
+                <input
+                  checked
                   @change="radioChange = pymentType[1]?.id"
                   name="price"
                   id="radio1"
@@ -114,7 +115,7 @@
                 <div class="dlv-wrp">
                   <div class="dlv-lb-wrp">
                     <input
-                    checked
+                      checked
                       id="check1"
                       name="d-radio"
                       type="radio"
@@ -208,7 +209,13 @@
                   </div>
                 </div>
                 <div class="delivery-home">
-                  <input type="checkbox" @change="checkBox = !checkBox, getPriceToHome = res?.data?.home_delivery_price " />
+                  <input
+                    type="checkbox"
+                    @change="
+                      (checkBox = !checkBox),
+                        (getPriceToHome = res?.data?.home_delivery_price)
+                    "
+                  />
                   <span>Uygacha yetkazib berish</span>
                 </div>
 
@@ -265,10 +272,21 @@
               </h2>
             </div>
 
-            <button v-if="store.purchease" class="buy__order-total__buy-btn" @click="delivery(), store.loadingBtn = true, store.purchease = false">
+            <button
+              v-if="store.purchease"
+              class="buy__order-total__buy-btn"
+              @click="
+                delivery(), (store.loadingBtn = true), (store.purchease = false)
+              "
+            >
               {{ t("purchase") }}
             </button>
-            <button class="buy__order-total__buy-btn delay" v-if="store.loadingBtn"><span class="loaderrr"></span></button>
+            <button
+              class="buy__order-total__buy-btn delay"
+              v-if="store.loadingBtn"
+            >
+              <span class="loaderrr"></span>
+            </button>
           </div>
         </div>
       </div>
@@ -283,8 +301,8 @@ import { useStore } from "~/store/store";
 
 const store = useStore();
 
-const taost = useToast()
-
+const taost = useToast();
+const router = useRouter();
 const radioChange = ref();
 
 const checkBox = ref(false);
@@ -317,14 +335,14 @@ onUnmounted(() => {
 
 const { locale, locales, t } = useI18n();
 
-const deliveryToHomePrice = ref({})
+const deliveryToHomePrice = ref({});
 
-const getPriceToHome = ref(Number(0))
+const getPriceToHome = ref(Number(0));
 
 async function PriceDeliveryToHome() {
-  const res = await services.priceDeliveryToHome()
-  deliveryToHomePrice.value = res.data
-  console.log(res)
+  const res = await services.priceDeliveryToHome();
+  deliveryToHomePrice.value = res.data;
+  console.log(res);
 }
 
 const regionShow = ref(false);
@@ -333,7 +351,7 @@ const regionDistShow = ref(false);
 const allPriceOrder = computed(() => {
   let price = 0;
   store.cart.forEach((el) => {
-    price += el.price * el.quantity
+    price += el.price * el.quantity;
   });
   return price;
 });
@@ -388,7 +406,11 @@ const floor = ref("");
 const date = Date();
 
 function urlFunc(url) {
-  window.location.href = url
+  if (url == "/") {
+    router.push("/");
+  } else {
+    window.location.href = url;
+  }
 }
 
 async function delivery() {
@@ -400,7 +422,7 @@ async function delivery() {
     return obj;
   });
   console.log(products);
-  
+
   const body = {
     payment_type: radioChange.value,
     region_id: regionId.value,
@@ -410,15 +432,15 @@ async function delivery() {
     floor: floor.value,
     delivery_date: date,
     home_delivery_sum: 25000,
-    products: products
+    products: products,
   };
   const res = await services.delivery(store.token, locale.value, body);
-  if(res.status == 200) {
-    if(res?.data?.url) {
-      urlFunc(res?.data?.url)
+  if (res.status == 200) {
+    if (res?.data?.url) {
+      urlFunc(res?.data?.url);
     } else {
-      urlFunc('/')
-      store.deliveryNotif = true
+      urlFunc("/");
+      store.deliveryNotif = true;
     }
   }
   console.log(res);
@@ -432,7 +454,7 @@ const deliveryToHome = async function () {
   console.log(res);
 };
 
-PriceDeliveryToHome()
+PriceDeliveryToHome();
 onMounted(() => {
   deliveryToHome();
   paymentTypes();
@@ -496,24 +518,24 @@ watch(
   }
 }
 .loaderrr {
-    width: 20px;
-    height: 20px;
-    border: 3px solid #fff;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
-    }
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
 
-    @keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-    } 
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .region-dist-wrap {
   width: 300px;
   height: 120px;
