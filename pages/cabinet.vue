@@ -9,21 +9,21 @@
             <ul>
               <li>
                 <NuxtLink to="/">{{ t("home") }}</NuxtLink
-                ><img src="@/assets/images/svg/chevron-right.svg" alt="" />
+                ><img src="~/assets/images/svg/chevron-right.svg" alt="" />
               </li>
             </ul>
             <button class="manneger" @click="store.servic = true">{{ t("chatName") }}</button>
           </nav>
           <!-- <div class="cabinet__header__grid-card">
-            <button><img src="@/assets/images/grid.svg" alt="" /></button>
-            <button><img src="@/assets/images/grid-menu.svg" alt="" /></button>
+            <button><img src="~/assets/images/grid.svg" alt="" /></button>
+            <button><img src="~/assets/images/grid-menu.svg" alt="" /></button>
           </div> -->
         </div>
 
         <div class="cabinet__wrapper">
           <div class="cabinet__wrapper__left">
             <button to="/" class="exit" @click="clearItem()">
-              <span><img src="@/assets/images/svg/exit.svg" alt="" /></span>
+              <span><img src="~/assets/images/svg/exit.svg" alt="" /></span>
               <button>{{ t("exit") }}</button>
             </button>
             <span class="cabinet-left-linie"></span>
@@ -34,7 +34,7 @@
               <div class="cabinet__wrapper__right__top__wrapper">
                 <div class="cabinet-profil">
                   <span class="prof-img"
-                    ><img src="@/assets/images/svg/man.svg" alt=""
+                    ><img src="~/assets/images/svg/man.svg" alt=""
                   /></span>
                   <span>{{ t("personalInformation") }}</span>
                 </div>
@@ -53,7 +53,7 @@
               <div class="history-information__header">
                 <div class="history-information__header__left">
                   <span
-                    ><img src="@/assets/images/svg/file-text.svg" alt=""
+                    ><img src="~/assets/images/svg/file-text.svg" alt=""
                   /></span>
                   <h3>{{ t("myOrders") }}</h3>
                 </div>
@@ -74,7 +74,7 @@
 
           <div class="cabinet__wrapper__left left-bottom">
             <div class="exit">
-              <span><img src="@/assets/images/svg/exit.svg" alt="" /></span>
+              <span><img src="~/assets/images/svg/exit.svg" alt="" /></span>
               <button>Выйти</button>
             </div>
             <span class="cabinet-left-linie"></span>

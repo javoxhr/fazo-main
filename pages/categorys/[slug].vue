@@ -40,7 +40,7 @@
             @click="(gridTemCol = false), (store.txtWrp = false)"
             v-if="gridTemCol"
           >
-            <img src="@/assets/images/svg/grid.svg" alt="" />
+            <img src="~/assets/images/svg/grid.svg" alt="" />
           </button>
           <button
             style="width: 30px; height: 30px"
@@ -48,7 +48,7 @@
             @click="(gridTemCol = true), (store.txtWrp = true)"
             v-if="!gridTemCol"
           >
-            <img src="@/assets/images/svg/grid-menu.svg" alt="" />
+            <img src="~/assets/images/svg/grid-menu.svg" alt="" />
           </button>
         </div>
       </div>
