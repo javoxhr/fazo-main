@@ -138,7 +138,8 @@
           </div>
 
           <div class="header-bottom__items">
-            <NuxtLink v-if="store.token"
+            <NuxtLink
+              v-if="store.token"
               :to="localePath('/cabinet')"
               class="header-bottom__items__item"
               @click="
@@ -151,14 +152,16 @@
               <span>{{ store?.userInfo?.firstname }} </span>
             </NuxtLink>
 
-            <button @click="store.registerOpen = true" style="border: none; background: none;"
+            <button
+              @click="store.registerOpen = true"
+              style="border: none; background: none"
               v-if="!store.token"
               class="header-bottom__items__item"
             >
               <img src="~/assets/images/svg/man.svg" alt="" />
               <span>Login</span>
             </button>
-            
+
             <NuxtLink
               to="/saved"
               v-if="store.token"
@@ -206,9 +209,7 @@
         <div class="container">
           <div class="header-category__main-btn">
             <button
-              @click="
-              categoryInst = false, openCategory= !openCategory
-              "
+              @click="(categoryInst = false), (openCategory = !openCategory)"
             >
               <img src="~/assets/images/svg/category-btn.svg" alt="" />{{
                 t("buttonCategory")
@@ -235,9 +236,11 @@
           <div class="open-category-header">
             <div class="container">
               <h2>Category</h2>
-              <button @click="openCategory = false"><img src="~/assets/images/svg/x.svg" alt=""></button>
+              <button @click="openCategory = false">
+                <img src="~/assets/images/svg/x.svg" alt="" />
+              </button>
             </div>
-            </div>
+          </div>
           <div class="container">
             <div class="open-category__wrapper">
               <div class="open-category__left">
@@ -245,7 +248,7 @@
                   class="open-category__left__item"
                   v-for="item in headerCategorys"
                   :key="item"
-                  @click="topCtaegoryItemTop(item?.id), categoryInst = true"
+                  @click="topCtaegoryItemTop(item?.id), (categoryInst = true)"
                 >
                   <button>
                     <img width="45px" :src="item?.iconUrl" alt="" />
@@ -267,6 +270,22 @@
                       display: categoryClose == item.id ? 'flex' : 'none',
                     }"
                   >
+                    <div class="media-category-wrap-header" @click="categoryClose = false">
+                      <button>
+                        <svg style="display: flex;"
+                          height="28"
+                          viewBox="0 0 48 48"
+                          width="28"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M30.83 32.67l-9.17-9.17 9.17-9.17-2.83-2.83-12 12 12 12z"
+                          />
+                          <path d="M0-.5h48v48h-48z" fill="none" />
+                        </svg>
+                      </button>
+                      <span>Ortga qaytish</span>
+                    </div>
                     <h1 class="categor-name">{{ item?.name }}</h1>
                     <NuxtLink
                       class="categor-slug"
@@ -318,18 +337,30 @@
           <button @click="store.enterPhone = true" v-if="!store.token">
             Регистрация
           </button>
-          <button @click="exitFunc()" v-if="store.token">{{ t("exit") }}</button>
+          <button @click="exitFunc()" v-if="store.token">
+            {{ t("exit") }}
+          </button>
         </div>
 
         <div class="menu__info">
-          <NuxtLink @click="openMenu = -100 + '%'" v-for="item in pageCategoryInfo" :key="item" :to="`/delivery/${item?.id}`">{{ item?.name }}</NuxtLink>
+          <NuxtLink
+            @click="openMenu = -100 + '%'"
+            v-for="item in pageCategoryInfo"
+            :key="item"
+            :to="`/delivery/${item?.id}`"
+            >{{ item?.name }}</NuxtLink
+          >
         </div>
 
         <div class="menu__lang">
-          <NuxtLink @click="openMenu = -100 + '%'" v-for="{code, name} in locales" :key="code" :to="swithcLocalePath(code)">
-             <button>{{ name }}</button>
+          <NuxtLink
+            @click="openMenu = -100 + '%'"
+            v-for="{ code, name } in locales"
+            :key="code"
+            :to="swithcLocalePath(code)"
+          >
+            <button>{{ name }}</button>
           </NuxtLink>
-
         </div>
       </div>
 
@@ -369,9 +400,9 @@
             v-if="!store.token"
           >
             <img src="~/assets/images/svg/user.svg" alt="" />
-            <span>{{ t("Login") }}</span> 
+            <span>{{ t("Login") }}</span>
           </NuxtLink>
-  
+
           <NuxtLink
             :to="localePath('/saved')"
             class="bottom-item"
@@ -407,7 +438,7 @@
     <CodeRegister :length="4" />
     <resetVerifyCode :lengthRes="4" />
     <NuxtPage />
-    <cart/>
+    <cart />
     <div class="footer">
       <div class="container">
         <div class="footer__left">
@@ -718,7 +749,7 @@ const productQuantity = computed(() => {
 });
 
 const openCategory = ref(false);
-const categoryInst = ref(false)
+const categoryInst = ref(false);
 const openMenu = ref(-100 + "%");
 async function getSavedProduct() {
   const res = await services.getSavedProduct(store.token);
@@ -792,7 +823,7 @@ const pageId = ref();
 const pageCtegory = async function () {
   const res = await services.pageCategory(locale.value);
   pageCategoryInfo.value = res?.data;
-  console.log(res.data)
+  console.log(res.data);
   res?.data?.forEach((el) => {
     categoryTop[el.id] = false;
   });
@@ -901,6 +932,30 @@ watch(
   display: flex;
   align-items: center;
 }
+.media-category-wrap-header {
+  padding-bottom: 20px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-left: -5px;
+  @media screen and (max-width: 1170px) {
+    display: flex;
+  }
+  span {
+    font-weight: 400;
+    font-size: 16px;
+  }
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    img {
+      width: 10px;
+      display: flex;
+    }
+  }
+}
 .product-count {
   width: 18px;
   height: 18px;
@@ -925,8 +980,14 @@ watch(
   align-items: flex-start;
   gap: 30px;
   @media screen and (max-width: 1170px) {
-    top: 480px;
-    left: 40px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    background: #fff;
+    padding-left: 23px;
+    padding-top: 10px;
+    margin-top: 80px;
   }
 }
 .categor-name {
