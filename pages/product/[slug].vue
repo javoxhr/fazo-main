@@ -248,6 +248,9 @@ const checkSaved = computed(() => {
   box-sizing: border-box;
   height: 20%;
   padding: 10px 0;
+  @media screen and (max-width: 500px) {
+    width: 300px;
+  }
 }
 
 .big-swiper-slide {
@@ -272,6 +275,12 @@ const checkSaved = computed(() => {
     font-weight: 500;
     font-size: 25px;
     margin-top: 20px;
+  }
+}
+.detail__text-wrapper {
+  width: 100%;
+  &__title {
+    width: 100%;
   }
 }
 </style>

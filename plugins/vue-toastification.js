@@ -1,19 +1,10 @@
-// plugins/vue-toastification.client.js
-import { defineNuxtPlugin } from '#app'
-import Toast, { POSITION } from 'vue-toastification'
-import 'vue-toastification/dist/index.css'
+import { defineNuxtPlugin } from "#app";
 
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+const options = {
+    // You can set your default options here
+};
 export default defineNuxtPlugin(nuxtApp => {
-  const options = {
-    position: POSITION.TOP_RIGHT,
-    timeout: 5000,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    draggablePercent: 0.6,
-    showCloseButtonOnHover: false,
-    hideProgressBar: false,
-  }
-
-  nuxtApp.vueApp.use(Toast, options)
+    nuxtApp.vueApp.use(Toast, options)
 })

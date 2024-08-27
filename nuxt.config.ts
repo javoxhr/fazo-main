@@ -5,6 +5,9 @@ export default defineNuxtConfig({
       apiBase: "https://vadalar.uz/api/"
     }
   },
+  build: {
+    transpile: ["vue-toastification"],
+  },
   modules: ["nuxt-swiper", "@pinia/nuxt", "@nuxtjs/i18n", "nuxt-primevue"],
   primevue: {
     options: {

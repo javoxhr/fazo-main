@@ -79,7 +79,7 @@
             @click="brandTog = !brandTog"
           >
             <h1>{{ t("brand") }}</h1>
-            
+
             <button
               class="brand-btn"
               :class="{ 'arrow-filter-item-active': brandTog }"
@@ -248,6 +248,26 @@ async function getCategorysProduct() {
   }
 }
 
+async function getCategorysFilter() {
+  store.loader = true;
+  try {
+    const res = await services.getCategorysProducts();
+    category.value = res.data;
+    minPrice.value = res?.data?.minPrice || 0;
+    maxPrice.value = res?.data?.maxPrice || 100000;
+    value.value = [maxPrice.value, minPrice.value];
+    console.log(res);
+
+    res.data.characters.forEach((character) => {
+      characterFilterVisibility[character.characterId] = false;
+    });
+  } catch (error) {
+    console.error("Ошибка при загрузке данных:", error);
+  } finally {
+    store.loader = false;
+  }
+}
+
 function toggleCharacterFilter(characterId) {
   characterFilterVisibility[characterId] =
     !characterFilterVisibility[characterId];
@@ -275,6 +295,7 @@ function selectBrand(id) {
 }
 
 onMounted(() => {
+  getCategorysFilter()
   getCategorysProduct();
 });
 
