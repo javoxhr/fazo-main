@@ -150,7 +150,7 @@ const item = computed(() => {
 });
 
 const checkSaved = computed(() => {
-  const item = store.cart?.find((el) => el.id == product.id);
+  const item = store.cart?.find((el) => el.id == product?.id);
   if (item) {
     return true;
   } else {
@@ -159,7 +159,7 @@ const checkSaved = computed(() => {
 });
 
 const checkLike = computed(() => {
-  const item = store.savedProducts?.items?.find((el) => el.id == product.id);
+  const item = store.savedProducts?.items?.find((el) => el?.id == product?.id);
   if (item) {
     return true;
   } else {

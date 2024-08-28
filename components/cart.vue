@@ -29,9 +29,10 @@
                 <span>{{ t("total") }} {{ store.cart.length }} {{ t("prod") }}</span>
                 <h2>{{ totalProduct }} Сум</h2>
               </div>
-              <NuxtLink :to="localePath('/order')" @click="store.showCart = false">
+              <NuxtLink v-if="store.token" :to="localePath('/order')" @click="store.showCart = false">
                 <button>{{ t("purchase") }}</button>
               </NuxtLink>
+              <button v-if="!store.token" @click="store.registerOpen = true, store.showCart = false">{{ t("purchase") }}</button>
             </div>
           </div>
         </div>

@@ -111,7 +111,13 @@
             <span>{{ detail?.product?.residue_store }}</span>
             <span>{{ t("pieces") }}</span>
           </span>
-          <NuxtLink :to="localePath('/order')">
+          <NuxtLink v-if="store.token" :to="localePath('/order')">
+            <div class="detail__text-wrapper__buy-btn">
+              <button @click="buyNow(item)">{{ t("BuyNow") }}</button>
+            </div>
+          </NuxtLink>
+
+          <NuxtLink @click="store.registerOpen = true" v-if="!store.token">
             <div class="detail__text-wrapper__buy-btn">
               <button @click="buyNow(item)">{{ t("BuyNow") }}</button>
             </div>
@@ -320,6 +326,7 @@ onMounted(() => {
     }
   }
 }
+
 
 .active-cart-detail {
   svg {
