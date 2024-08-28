@@ -83,6 +83,13 @@ export default {
             }
         })
     },
+    getHeaderCategorysIns(lang) {
+        return $fetch(`https://api.mtdmarket.uz/api/category-manager/category/index`, {
+            headers: {
+                "Accept-Language": lang
+            }
+        })
+    },
     headerCategorys() {
         return $fetch(`${baseUrl.value}category-manager/category/index`)
     },

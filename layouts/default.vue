@@ -246,7 +246,7 @@
               <div class="open-category__left">
                 <div
                   class="open-category__left__item"
-                  v-for="item in headerCategorys"
+                  v-for="item in katalog"
                   :key="item"
                   @click="topCtaegoryItemTop(item?.id), (categoryInst = true)"
                 >
@@ -784,6 +784,16 @@ async function getHeaderCategorys() {
   store.loader = false;
 }
 
+const katalog = ref({})
+
+const catalog = async function() {
+  store.loader = true;
+  const res = await services.getHeaderCategorysIns(locale.value);
+  katalog.value = res.data;
+  console.log(res);
+  store.loader = false;
+} 
+
 const headerCategorysInsaydes = ref({});
 
 async function headerCategorysIns() {
@@ -848,7 +858,12 @@ onMounted(() => {
   getHeaderCategorys();
   getUserInfo();
   getSavedProduct();
+  catalog()
 });
+
+watch(()=> locale.value, ()=> {
+  catalog()
+})
 
 watch(()=> locale.value, ()=> {
   pageCtegory();

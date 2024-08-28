@@ -89,7 +89,7 @@
                 </svg>
               </button>
               <span class="card-btns-lin"></span>
-              <button v-if="store.token" @click="createSaved()">
+              <button v-if="store.token" :class="{'detiel-saved': checkLike}" @click="createSaved()">
                 <svg
                   enable-background="new 0 0 128 128"
                   height="25px"
@@ -247,24 +247,35 @@ const getDetail = async () => {
 const getSavedProduct = async () => {
   try {
     const res = await services.getSavedProduct(store?.token);
+    console.log('Saved products fetched:', res.data); // Добавьте эту строку
     store.savedProducts = res?.data;
   } catch (error) {
     console.error("Error fetching saved products:", error);
   }
 };
 
+
 const createSaved = async () => {
   try {
     await services.createSaved(
       store?.token,
-      detail?.product?.slug,
+      detail.value?.product?.slug,
       locale.value
     );
-    await getSavedProduct();
+   getSavedProduct();
   } catch (error) {
     console.error("Error creating saved product:", error);
   }
 };
+
+const checkLike = computed(() => {
+  console.log('Checking like status...');
+  console.log('Saved products:', store.savedProducts);
+  console.log('Item ID:', item.value?.id);
+  
+  return !!store.savedProducts?.items?.find((el) => el?.id == item.value?.id);
+});
+
 
 const checkCart = computed(() => {
   return !!store.cart?.find((el) => el.id == item.value?.id);
@@ -293,6 +304,15 @@ onMounted(() => {
   padding: 10px 0;
   @media screen and (max-width: 500px) {
     width: 300px;
+  }
+}
+
+.detiel-saved {
+  svg {
+    path {
+      fill: rgb(0, 123, 255) !important;
+      stroke: rgb(0, 123, 255) !important;
+    }
   }
 }
 

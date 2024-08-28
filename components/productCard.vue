@@ -149,17 +149,10 @@ const item = computed(() => {
   return item;
 });
 
+const bx = ref(false)
+
 const checkSaved = computed(() => {
   const item = store.cart?.find((el) => el.id == product?.id);
-  if (item) {
-    return true;
-  } else {
-    return false;
-  }
-});
-
-const checkLike = computed(() => {
-  const item = store.savedProducts?.items?.find((el) => el?.id == product?.id);
   if (item) {
     return true;
   } else {
@@ -170,6 +163,7 @@ const checkLike = computed(() => {
 async function getSavedProduct() {
   const res = await services.getSavedProduct(store?.token);
   store.savedProducts = res?.data;
+    bx.value = true
 }
 const createSaved = async () => {
   const res = await services.createSaved(
@@ -177,8 +171,22 @@ const createSaved = async () => {
     product?.slug,
     locale.value
   );
-  getSavedProduct();
+    bx.value = true
+   getSavedProduct();
 };
+
+const checkLike = computed(() => {
+  const item = store.savedProducts?.items?.find((el) => el?.id == product?.id);
+  if (item) {
+    return true;
+  } else {
+    return false;
+  }
+});
+
+watch(()=> bx.value == true, ()=> {
+  getSavedProduct()
+})
 </script>
 
 <style lang="scss">
