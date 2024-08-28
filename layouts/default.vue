@@ -920,7 +920,7 @@ watch(
     color: #fff;
     position: absolute;
     top: -13px;
-    left: 32px;
+    left: 18px;
   }
   .bt-item-saved-tot {
     width: 20px;
