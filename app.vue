@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="body">
     <NuxtLayout />
   </div>
 </template>
@@ -26,3 +26,9 @@ onMounted(() => {
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.body {
+  background: #fff;
+}
+</style>
