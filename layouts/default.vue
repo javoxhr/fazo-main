@@ -159,7 +159,7 @@
               class="header-bottom__items__item"
             >
               <img src="~/assets/images/svg/man.svg" alt="" />
-              <span>Login</span>
+              <span>{{ t("Login") }}</span>
             </button>
 
             <NuxtLink
@@ -270,9 +270,13 @@
                       display: categoryClose == item.id ? 'flex' : 'none',
                     }"
                   >
-                    <div class="media-category-wrap-header" @click="categoryClose = false">
+                    <div
+                      class="media-category-wrap-header"
+                      @click="categoryClose = false"
+                    >
                       <button>
-                        <svg style="display: flex;"
+                        <svg
+                          style="display: flex"
                           height="28"
                           viewBox="0 0 48 48"
                           width="28"
@@ -286,7 +290,13 @@
                       </button>
                       <span>Ortga qaytish</span>
                     </div>
-                    <h1 class="categor-name">{{ item?.name }}</h1>
+                    <NuxtLink
+                      @click="openCategory = false"
+                      style="color: #000"
+                      :to="`/categorys/${item?.slug}`"
+                      class="categor-name"
+                      >{{ item?.name }}</NuxtLink
+                    >
                     <NuxtLink
                       class="categor-slug"
                       :to="`/katalog/${sl?.slug}`"
@@ -840,6 +850,10 @@ onMounted(() => {
   getSavedProduct();
 });
 
+watch(()=> locale.value, ()=> {
+  pageCtegory();
+})
+
 watch(
   () => locale.value,
   () => {
@@ -881,7 +895,7 @@ watch(
     color: #fff;
     position: absolute;
     top: -13px;
-    right: -5px;
+    left: 32px;
   }
   .bt-item-saved-tot {
     width: 20px;
@@ -973,8 +987,8 @@ watch(
 }
 .categor-slug-wrap {
   position: absolute;
-  top: 55px;
-  left: 500px;
+  top: 0;
+  left: 450px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -983,11 +997,11 @@ watch(
     top: 0;
     left: 0;
     width: 100%;
-    height: 80%;
+    height: 100%;
     background: #fff;
     padding-left: 23px;
     padding-top: 10px;
-    margin-top: 80px;
+    margin-top: 5px;
   }
 }
 .categor-name {

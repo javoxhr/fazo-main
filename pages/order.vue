@@ -424,7 +424,7 @@ async function delivery() {
   console.log(products);
 
   const body = {
-    payment_type: radioChange.value,
+    payment_type: radioChange.value ? radioChange.value : 2,
     region_id: regionId.value,
     district_id: getRegionId.value,
     is_delivery_home: checkBox.value ? 1 : "",
