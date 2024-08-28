@@ -89,7 +89,23 @@
                 </svg>
               </button>
               <span class="card-btns-lin"></span>
-              <button @click="createSaved">
+              <button v-if="store.token" @click="createSaved()">
+                <svg
+                  enable-background="new 0 0 128 128"
+                  height="25px"
+                  version="1.1"
+                  viewBox="0 0 128 128"
+                  width="25px"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M127,44.205c0-18.395-14.913-33.308-33.307-33.308c-12.979,0-24.199,7.441-29.692,18.276  c-5.497-10.835-16.714-18.274-29.694-18.274C15.912,10.898,1,25.81,1,44.205C1,79,56.879,117.104,64.001,117.104  C71.124,117.104,127,79.167,127,44.205z"
+                    fill="rgb(107, 105, 105)"
+                  />
+                </svg>
+              </button>
+
+              <button v-if="!store?.token" @click="store.registerOpen = true">
                 <svg
                   enable-background="new 0 0 128 128"
                   height="25px"
@@ -119,7 +135,7 @@
 
           <NuxtLink @click="store.registerOpen = true" v-if="!store.token">
             <div class="detail__text-wrapper__buy-btn">
-              <button @click="buyNow(item)">{{ t("BuyNow") }}</button>
+              <button>{{ t("BuyNow") }}</button>
             </div>
           </NuxtLink>
           <div class="detail__text-wrapper__info">
@@ -286,6 +302,11 @@ onMounted(() => {
 
 .big-swiper {
   width: 300px;
+}
+
+.product-quantity {
+  margin-top: 20px;
+  display: block;
 }
 
 .big-img {

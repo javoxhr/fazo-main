@@ -26,7 +26,13 @@
       </div>
       <form @submit.prevent="login()">
         <span class="tel">Номер Телефона</span>
-        <input @click="mask" @input="mask" v-model="username" placeholder="+998 (" type="text" />
+        <input
+          @click="mask"
+          @input="mask"
+          v-model="username"
+          placeholder="+998 ("
+          type="text"
+        />
         <div class="text">
           <span>Пароль</span>
           <button
@@ -94,9 +100,12 @@ const mask = (event) => {
     (keyCode > 47 && keyCode < 58)
   ) {
     event.target.value = newValue;
+    // Обновите v-model значением без символов
+    username.value = event.target.value.replace(/\D/g, "");
   }
   if (event.type === "blur" && event.target.value.length < 5) {
     event.target.value = "";
+    username.value = "";
   }
 };
 
@@ -117,7 +126,8 @@ function reloadFunc() {
 }
 
 async function login() {
-  const res = await services.loginEtapFirst(username.value, password.value);
+  const cleanedUsername = username.value.replace(/\D/g, ""); // Удалите все символы, кроме цифр
+  const res = await services.loginEtapFirst(cleanedUsername, password.value);
   console.log(res);
   if (res.status == 200) {
     localStorage.setItem("authKey", res.data.auth_key);

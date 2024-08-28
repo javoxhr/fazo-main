@@ -876,6 +876,10 @@ watch(
     position: relative;
   }
 }
+.categor-name {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
 .bottom-item {
   display: flex;
   flex-direction: column;
