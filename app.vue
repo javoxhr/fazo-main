@@ -7,6 +7,15 @@
 <script setup>
 import { useStore } from "./store/store";
 
+import { useHead } from '#app'
+
+// Устанавливаем мета-теги для всего приложения
+useHead({
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' }
+  ]
+})
+
 const store = useStore();
 
 onMounted(() => {

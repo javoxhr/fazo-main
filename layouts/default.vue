@@ -735,6 +735,12 @@
 import services from "~/services/services";
 import { useStore } from "~/store/store";
 
+definePageMeta({
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' }
+  ]
+})
+
 const store = useStore();
 
 const langShow = ref(false);
