@@ -436,6 +436,9 @@ async function delivery() {
   };
   const res = await services.delivery(store.token, locale.value, body);
   if (res.status == 200) {
+    store.purchease = true
+    store.loadingBtn = false
+    localStorage.removeItem('cart')
     if (res?.data?.url) {
       urlFunc(res?.data?.url);
     } else {
